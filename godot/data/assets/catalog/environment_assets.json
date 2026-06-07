@@ -1,0 +1,583 @@
+{
+  "assets": {
+    "camp_command_bunker": {
+      "lod_meshes": [
+        "res://assets/environment/camp/command_bunker_lod0.tscn",
+        "res://assets/environment/camp/command_bunker_lod1.tscn"
+      ],
+      "collision_mesh": "res://assets/environment/camp/command_bunker_collision.tres",
+      "material_set": "camp_mud_wood_sandbag_v2",
+      "memory_budget_tag": "structure_hero",
+      "source": "procedural_modular_kit"
+    },
+    "camp_prison_cage": {
+      "lod_meshes": [
+        "res://assets/environment/camp/prison_cage_lod0.tscn",
+        "res://assets/environment/camp/prison_cage_lod1.tscn"
+      ],
+      "collision_mesh": "res://assets/environment/camp/prison_cage_collision.tres",
+      "material_set": "camp_metal_cage_v1",
+      "memory_budget_tag": "prop_hero",
+      "source": "procedural_modular_kit"
+    },
+    "camp_radio_post": {
+      "lod_meshes": [
+        "res://assets/environment/camp/radio_post_lod0.tscn",
+        "res://assets/environment/camp/radio_post_lod1.tscn"
+      ],
+      "collision_mesh": "res://assets/environment/camp/radio_post_collision.tres",
+      "material_set": "camp_metal_field_v1",
+      "memory_budget_tag": "prop_hero",
+      "source": "procedural_modular_kit"
+    },
+    "camp_sandbag_line_01": {
+      "lod_meshes": [
+        "res://assets/environment/camp/camp_sandbag_line_01_lod0.tscn",
+        "res://assets/environment/camp/camp_sandbag_line_01_lod1.tscn"
+      ],
+      "collision_mesh": "res://assets/environment/camp/camp_sandbag_line_01_collision.tres",
+      "material_set": "camp_sandbag_worn_v1",
+      "memory_budget_tag": "prop_repeat",
+      "source": "procedural_modular_kit"
+    },
+    "camp_sandbag_line_02": {
+      "lod_meshes": [
+        "res://assets/environment/camp/camp_sandbag_line_02_lod0.tscn",
+        "res://assets/environment/camp/camp_sandbag_line_02_lod1.tscn"
+      ],
+      "collision_mesh": "res://assets/environment/camp/camp_sandbag_line_02_collision.tres",
+      "material_set": "camp_sandbag_worn_v1",
+      "memory_budget_tag": "prop_repeat",
+      "source": "procedural_modular_kit"
+    },
+    "camp_watchtower": {
+      "lod_meshes": [
+        "res://assets/environment/camp/watchtower_lod0.tscn",
+        "res://assets/environment/camp/watchtower_lod1.tscn"
+      ],
+      "collision_mesh": "res://assets/environment/camp/watchtower_collision.tres",
+      "material_set": "camp_wood_mud_v2",
+      "memory_budget_tag": "structure_mid",
+      "source": "procedural_modular_kit"
+    },
+    "clinic_ambulance_wreck": {
+      "lod_meshes": [
+        "res://assets/environment/clinic/ambulance_wreck_lod0.tscn",
+        "res://assets/environment/clinic/ambulance_wreck_lod1.tscn"
+      ],
+      "collision_mesh": "res://assets/environment/clinic/ambulance_wreck_collision.tres",
+      "material_set": "clinic_metal_worn_v1",
+      "memory_budget_tag": "prop_mid",
+      "source": "procedural_modular_kit"
+    },
+    "clinic_cache_box": {
+      "lod_meshes": [
+        "res://assets/environment/clinic/clinic_cache_box_lod0.tscn",
+        "res://assets/environment/clinic/clinic_cache_box_lod1.tscn"
+      ],
+      "collision_mesh": "res://assets/environment/clinic/clinic_cache_box_collision.tres",
+      "material_set": "clinic_supply_wood_v1",
+      "memory_budget_tag": "prop_repeat",
+      "source": "procedural_modular_kit"
+    },
+    "clinic_main_building": {
+      "lod_meshes": [
+        "res://assets/environment/clinic/main_building_lod0.tscn",
+        "res://assets/environment/clinic/main_building_lod1.tscn"
+      ],
+      "collision_mesh": "res://assets/environment/clinic/main_building_collision.tres",
+      "material_set": "clinic_plaster_concrete_v2",
+      "memory_budget_tag": "structure_hero",
+      "source": "procedural_modular_kit"
+    },
+    "clinic_triage_tent": {
+      "lod_meshes": [
+        "res://assets/environment/clinic/triage_tent_lod0.tscn",
+        "res://assets/environment/clinic/triage_tent_lod1.tscn"
+      ],
+      "collision_mesh": "res://assets/environment/clinic/triage_tent_collision.tres",
+      "material_set": "clinic_canvas_v1",
+      "memory_budget_tag": "prop_mid",
+      "source": "procedural_modular_kit"
+    },
+    "crash_debris_field_01": {
+      "lod_meshes": [
+        "res://assets/environment/crash/crash_debris_field_01_lod0.tscn",
+        "res://assets/environment/crash/crash_debris_field_01_lod1.tscn"
+      ],
+      "collision_mesh": "res://assets/environment/crash/crash_debris_field_01_collision.tres",
+      "material_set": "crash_debris_charred_v1",
+      "memory_budget_tag": "setdress_cluster",
+      "source": "procedural_modular_kit"
+    },
+    "crash_debris_field_02": {
+      "lod_meshes": [
+        "res://assets/environment/crash/crash_debris_field_02_lod0.tscn",
+        "res://assets/environment/crash/crash_debris_field_02_lod1.tscn"
+      ],
+      "collision_mesh": "res://assets/environment/crash/crash_debris_field_02_collision.tres",
+      "material_set": "crash_debris_charred_v1",
+      "memory_budget_tag": "setdress_cluster",
+      "source": "procedural_modular_kit"
+    },
+    "crash_fire_bed_01": {
+      "lod_meshes": [
+        "res://assets/environment/crash/crash_fire_bed_01_lod0.tscn",
+        "res://assets/environment/crash/crash_fire_bed_01_lod1.tscn"
+      ],
+      "collision_mesh": "res://assets/environment/crash/crash_fire_bed_01_collision.tres",
+      "material_set": "crash_fire_embers_v1",
+      "memory_budget_tag": "vfx_fire",
+      "source": "procedural_modular_kit"
+    },
+    "crash_helicopter_fuselage": {
+      "lod_meshes": [
+        "res://assets/environment/crash/crash_helicopter_fuselage_lod0.tscn",
+        "res://assets/environment/crash/crash_helicopter_fuselage_lod1.tscn"
+      ],
+      "collision_mesh": "res://assets/environment/crash/crash_helicopter_fuselage_collision.tres",
+      "material_set": "crash_helicopter_hull_v1",
+      "memory_budget_tag": "structure_hero",
+      "source": "procedural_modular_kit"
+    },
+    "crash_map_case": {
+      "lod_meshes": [
+        "res://assets/environment/crash/crash_map_case_lod0.tscn",
+        "res://assets/environment/crash/crash_map_case_lod1.tscn"
+      ],
+      "collision_mesh": "res://assets/environment/crash/crash_map_case_collision.tres",
+      "material_set": "crash_objective_case_v1",
+      "memory_budget_tag": "prop_hero",
+      "source": "procedural_modular_kit"
+    },
+    "crash_rotor_hub": {
+      "lod_meshes": [
+        "res://assets/environment/crash/crash_rotor_hub_lod0.tscn",
+        "res://assets/environment/crash/crash_rotor_hub_lod1.tscn"
+      ],
+      "collision_mesh": "res://assets/environment/crash/crash_rotor_hub_collision.tres",
+      "material_set": "crash_helicopter_hull_v1",
+      "memory_budget_tag": "prop_hero",
+      "source": "procedural_modular_kit"
+    },
+    "crash_scorch_decal_01": {
+      "lod_meshes": [
+        "res://assets/environment/crash/crash_scorch_decal_01_lod0.tscn",
+        "res://assets/environment/crash/crash_scorch_decal_01_lod1.tscn"
+      ],
+      "collision_mesh": "res://assets/environment/crash/crash_scorch_decal_01_collision.tres",
+      "material_set": "crash_scorch_decal_v1",
+      "memory_budget_tag": "decal",
+      "source": "procedural_modular_kit"
+    },
+    "crash_scorch_decal_02": {
+      "lod_meshes": [
+        "res://assets/environment/crash/crash_scorch_decal_02_lod0.tscn",
+        "res://assets/environment/crash/crash_scorch_decal_02_lod1.tscn"
+      ],
+      "collision_mesh": "res://assets/environment/crash/crash_scorch_decal_02_collision.tres",
+      "material_set": "crash_scorch_decal_v1",
+      "memory_budget_tag": "decal",
+      "source": "procedural_modular_kit"
+    },
+    "crash_smoke_column_01": {
+      "lod_meshes": [
+        "res://assets/environment/crash/crash_smoke_column_01_lod0.tscn",
+        "res://assets/environment/crash/crash_smoke_column_01_lod1.tscn"
+      ],
+      "collision_mesh": "res://assets/environment/crash/crash_smoke_column_01_collision.tres",
+      "material_set": "crash_smoke_alpha_v1",
+      "memory_budget_tag": "vfx_smoke",
+      "source": "procedural_modular_kit"
+    },
+    "crash_supply_crates": {
+      "lod_meshes": [
+        "res://assets/environment/crash/crash_supply_crates_lod0.tscn",
+        "res://assets/environment/crash/crash_supply_crates_lod1.tscn"
+      ],
+      "collision_mesh": "res://assets/environment/crash/crash_supply_crates_collision.tres",
+      "material_set": "crash_supply_wood_v1",
+      "memory_budget_tag": "prop_mid",
+      "source": "procedural_modular_kit"
+    },
+    "crash_tail_boom": {
+      "lod_meshes": [
+        "res://assets/environment/crash/crash_tail_boom_lod0.tscn",
+        "res://assets/environment/crash/crash_tail_boom_lod1.tscn"
+      ],
+      "collision_mesh": "res://assets/environment/crash/crash_tail_boom_collision.tres",
+      "material_set": "crash_helicopter_hull_v1",
+      "memory_budget_tag": "prop_hero",
+      "source": "procedural_modular_kit"
+    },
+    "hamlet_cooking_fire_01": {
+      "lod_meshes": [
+        "res://assets/environment/hamlet/hamlet_cooking_fire_01_lod0.tscn",
+        "res://assets/environment/hamlet/hamlet_cooking_fire_01_lod1.tscn"
+      ],
+      "collision_mesh": "res://assets/environment/hamlet/hamlet_cooking_fire_01_collision.tres",
+      "material_set": "hamlet_fire_ring_v1",
+      "memory_budget_tag": "prop_hero",
+      "source": "procedural_modular_kit"
+    },
+    "hamlet_fishing_rack": {
+      "lod_meshes": [
+        "res://assets/environment/hamlet/hamlet_fishing_rack_lod0.tscn",
+        "res://assets/environment/hamlet/hamlet_fishing_rack_lod1.tscn"
+      ],
+      "collision_mesh": "res://assets/environment/hamlet/hamlet_fishing_rack_collision.tres",
+      "material_set": "hamlet_domestic_clutter_v1",
+      "memory_budget_tag": "prop_repeat",
+      "source": "procedural_modular_kit"
+    },
+    "hamlet_hut_01": {
+      "lod_meshes": [
+        "res://assets/environment/hamlet/hamlet_hut_01_lod0.tscn",
+        "res://assets/environment/hamlet/hamlet_hut_01_lod1.tscn"
+      ],
+      "collision_mesh": "res://assets/environment/hamlet/hamlet_hut_01_collision.tres",
+      "material_set": "hamlet_bamboo_thatch_v1",
+      "memory_budget_tag": "structure_mid",
+      "source": "procedural_modular_kit"
+    },
+    "hamlet_hut_02": {
+      "lod_meshes": [
+        "res://assets/environment/hamlet/hamlet_hut_02_lod0.tscn",
+        "res://assets/environment/hamlet/hamlet_hut_02_lod1.tscn"
+      ],
+      "collision_mesh": "res://assets/environment/hamlet/hamlet_hut_02_collision.tres",
+      "material_set": "hamlet_bamboo_thatch_v1",
+      "memory_budget_tag": "structure_mid",
+      "source": "procedural_modular_kit"
+    },
+    "hamlet_hut_03": {
+      "lod_meshes": [
+        "res://assets/environment/hamlet/hamlet_hut_03_lod0.tscn",
+        "res://assets/environment/hamlet/hamlet_hut_03_lod1.tscn"
+      ],
+      "collision_mesh": "res://assets/environment/hamlet/hamlet_hut_03_collision.tres",
+      "material_set": "hamlet_bamboo_thatch_v1",
+      "memory_budget_tag": "structure_mid",
+      "source": "procedural_modular_kit"
+    },
+    "hamlet_hut_04": {
+      "lod_meshes": [
+        "res://assets/environment/hamlet/hamlet_hut_04_lod0.tscn",
+        "res://assets/environment/hamlet/hamlet_hut_04_lod1.tscn"
+      ],
+      "collision_mesh": "res://assets/environment/hamlet/hamlet_hut_04_collision.tres",
+      "material_set": "hamlet_bamboo_thatch_v1",
+      "memory_budget_tag": "structure_mid",
+      "source": "procedural_modular_kit"
+    },
+    "hamlet_hut_05": {
+      "lod_meshes": [
+        "res://assets/environment/hamlet/hamlet_hut_05_lod0.tscn",
+        "res://assets/environment/hamlet/hamlet_hut_05_lod1.tscn"
+      ],
+      "collision_mesh": "res://assets/environment/hamlet/hamlet_hut_05_collision.tres",
+      "material_set": "hamlet_bamboo_thatch_v1",
+      "memory_budget_tag": "structure_mid",
+      "source": "procedural_modular_kit"
+    },
+    "hamlet_market_canopy": {
+      "lod_meshes": [
+        "res://assets/environment/hamlet/hamlet_market_canopy_lod0.tscn",
+        "res://assets/environment/hamlet/hamlet_market_canopy_lod1.tscn"
+      ],
+      "collision_mesh": "res://assets/environment/hamlet/hamlet_market_canopy_collision.tres",
+      "material_set": "hamlet_market_wood_cloth_v1",
+      "memory_budget_tag": "prop_mid",
+      "source": "procedural_modular_kit"
+    },
+    "hamlet_supply_cart": {
+      "lod_meshes": [
+        "res://assets/environment/hamlet/hamlet_supply_cart_lod0.tscn",
+        "res://assets/environment/hamlet/hamlet_supply_cart_lod1.tscn"
+      ],
+      "collision_mesh": "res://assets/environment/hamlet/hamlet_supply_cart_collision.tres",
+      "material_set": "hamlet_market_wood_cloth_v1",
+      "memory_budget_tag": "prop_mid",
+      "source": "procedural_modular_kit"
+    },
+    "hamlet_water_jars": {
+      "lod_meshes": [
+        "res://assets/environment/hamlet/hamlet_water_jars_lod0.tscn",
+        "res://assets/environment/hamlet/hamlet_water_jars_lod1.tscn"
+      ],
+      "collision_mesh": "res://assets/environment/hamlet/hamlet_water_jars_collision.tres",
+      "material_set": "hamlet_domestic_clutter_v1",
+      "memory_budget_tag": "prop_repeat",
+      "source": "procedural_modular_kit"
+    },
+    "outpost_checkpoint_barrier_01": {
+      "lod_meshes": [
+        "res://assets/environment/outpost/outpost_checkpoint_barrier_01_lod0.tscn",
+        "res://assets/environment/outpost/outpost_checkpoint_barrier_01_lod1.tscn"
+      ],
+      "collision_mesh": "res://assets/environment/outpost/outpost_checkpoint_barrier_01_collision.tres",
+      "material_set": "outpost_sandbag_worn_v1",
+      "memory_budget_tag": "prop_repeat",
+      "source": "procedural_modular_kit"
+    },
+    "outpost_checkpoint_barrier_02": {
+      "lod_meshes": [
+        "res://assets/environment/outpost/outpost_checkpoint_barrier_02_lod0.tscn",
+        "res://assets/environment/outpost/outpost_checkpoint_barrier_02_lod1.tscn"
+      ],
+      "collision_mesh": "res://assets/environment/outpost/outpost_checkpoint_barrier_02_collision.tres",
+      "material_set": "outpost_sandbag_worn_v1",
+      "memory_budget_tag": "prop_repeat",
+      "source": "procedural_modular_kit"
+    },
+    "outpost_command_post": {
+      "lod_meshes": [
+        "res://assets/environment/outpost/outpost_command_post_lod0.tscn",
+        "res://assets/environment/outpost/outpost_command_post_lod1.tscn"
+      ],
+      "collision_mesh": "res://assets/environment/outpost/outpost_command_post_collision.tres",
+      "material_set": "outpost_military_steel_wood_v1",
+      "memory_budget_tag": "structure_hero",
+      "source": "procedural_modular_kit"
+    },
+    "outpost_comms_corner": {
+      "lod_meshes": [
+        "res://assets/environment/outpost/outpost_comms_corner_lod0.tscn",
+        "res://assets/environment/outpost/outpost_comms_corner_lod1.tscn"
+      ],
+      "collision_mesh": "res://assets/environment/outpost/outpost_comms_corner_collision.tres",
+      "material_set": "outpost_signal_metal_v1",
+      "memory_budget_tag": "prop_hero",
+      "source": "procedural_modular_kit"
+    },
+    "outpost_gate": {
+      "lod_meshes": [
+        "res://assets/environment/outpost/gate_lod0.glb",
+        "res://assets/environment/outpost/gate_lod1.glb"
+      ],
+      "collision_mesh": "res://assets/environment/outpost/gate_collision.glb",
+      "material_set": "outpost_military_steel_wood_v1",
+      "memory_budget_tag": "structure_hero"
+    },
+    "outpost_sandbag_nest": {
+      "lod_meshes": [
+        "res://assets/environment/outpost/outpost_sandbag_nest_lod0.tscn",
+        "res://assets/environment/outpost/outpost_sandbag_nest_lod1.tscn"
+      ],
+      "collision_mesh": "res://assets/environment/outpost/outpost_sandbag_nest_collision.tres",
+      "material_set": "outpost_sandbag_worn_v1",
+      "memory_budget_tag": "prop_repeat",
+      "source": "procedural_modular_kit"
+    },
+    "outpost_spotlight_mast": {
+      "lod_meshes": [
+        "res://assets/environment/outpost/outpost_spotlight_mast_lod0.tscn",
+        "res://assets/environment/outpost/outpost_spotlight_mast_lod1.tscn"
+      ],
+      "collision_mesh": "res://assets/environment/outpost/outpost_spotlight_mast_collision.tres",
+      "material_set": "outpost_signal_metal_v1",
+      "memory_budget_tag": "prop_hero",
+      "source": "procedural_modular_kit"
+    },
+    "outpost_triage_tent": {
+      "lod_meshes": [
+        "res://assets/environment/outpost/outpost_triage_tent_lod0.tscn",
+        "res://assets/environment/outpost/outpost_triage_tent_lod1.tscn"
+      ],
+      "collision_mesh": "res://assets/environment/outpost/outpost_triage_tent_collision.tres",
+      "material_set": "outpost_canvas_medical_v1",
+      "memory_budget_tag": "prop_mid",
+      "source": "procedural_modular_kit"
+    },
+    "outpost_watch_tower": {
+      "lod_meshes": [
+        "res://assets/environment/outpost/outpost_watch_tower_lod0.tscn",
+        "res://assets/environment/outpost/outpost_watch_tower_lod1.tscn"
+      ],
+      "collision_mesh": "res://assets/environment/outpost/outpost_watch_tower_collision.tres",
+      "material_set": "outpost_military_steel_wood_v1",
+      "memory_budget_tag": "structure_mid",
+      "source": "procedural_modular_kit"
+    },
+    "river_boat": {
+      "lod_meshes": [
+        "res://assets/environment/river/river_boat_lod0.tscn",
+        "res://assets/environment/river/river_boat_lod1.tscn"
+      ],
+      "collision_mesh": "res://assets/environment/river/river_boat_collision.tres",
+      "material_set": "river_boat_hull_worn_v1",
+      "memory_budget_tag": "prop_hero",
+      "source": "procedural_modular_kit"
+    },
+    "river_crate_cluster": {
+      "lod_meshes": [
+        "res://assets/environment/river/river_crate_cluster_lod0.tscn",
+        "res://assets/environment/river/river_crate_cluster_lod1.tscn"
+      ],
+      "collision_mesh": "res://assets/environment/river/river_crate_cluster_collision.tres",
+      "material_set": "river_timber_mud_v1",
+      "memory_budget_tag": "prop_mid",
+      "source": "procedural_modular_kit"
+    },
+    "river_dock_platform": {
+      "lod_meshes": [
+        "res://assets/environment/river/river_dock_platform_lod0.tscn",
+        "res://assets/environment/river/river_dock_platform_lod1.tscn"
+      ],
+      "collision_mesh": "res://assets/environment/river/river_dock_platform_collision.tres",
+      "material_set": "river_timber_mud_v1",
+      "memory_budget_tag": "structure_mid",
+      "source": "procedural_modular_kit"
+    },
+    "river_ferry_post_east": {
+      "lod_meshes": [
+        "res://assets/environment/river/river_ferry_post_east_lod0.tscn",
+        "res://assets/environment/river/river_ferry_post_east_lod1.tscn"
+      ],
+      "collision_mesh": "res://assets/environment/river/river_ferry_post_east_collision.tres",
+      "material_set": "river_timber_mud_v1",
+      "memory_budget_tag": "prop_mid",
+      "source": "procedural_modular_kit"
+    },
+    "river_ferry_post_west": {
+      "lod_meshes": [
+        "res://assets/environment/river/river_ferry_post_west_lod0.tscn",
+        "res://assets/environment/river/river_ferry_post_west_lod1.tscn"
+      ],
+      "collision_mesh": "res://assets/environment/river/river_ferry_post_west_collision.tres",
+      "material_set": "river_timber_mud_v1",
+      "memory_budget_tag": "prop_mid",
+      "source": "procedural_modular_kit"
+    },
+    "river_lantern_post_01": {
+      "lod_meshes": [
+        "res://assets/environment/river/river_lantern_post_01_lod0.tscn",
+        "res://assets/environment/river/river_lantern_post_01_lod1.tscn"
+      ],
+      "collision_mesh": "res://assets/environment/river/river_lantern_post_01_collision.tres",
+      "material_set": "river_lantern_metal_v1",
+      "memory_budget_tag": "prop_hero",
+      "source": "procedural_modular_kit"
+    },
+    "river_lantern_post_02": {
+      "lod_meshes": [
+        "res://assets/environment/river/river_lantern_post_02_lod0.tscn",
+        "res://assets/environment/river/river_lantern_post_02_lod1.tscn"
+      ],
+      "collision_mesh": "res://assets/environment/river/river_lantern_post_02_collision.tres",
+      "material_set": "river_lantern_metal_v1",
+      "memory_budget_tag": "prop_hero",
+      "source": "procedural_modular_kit"
+    },
+    "river_rope_winch": {
+      "lod_meshes": [
+        "res://assets/environment/river/river_rope_winch_lod0.tscn",
+        "res://assets/environment/river/river_rope_winch_lod1.tscn"
+      ],
+      "collision_mesh": "res://assets/environment/river/river_rope_winch_collision.tres",
+      "material_set": "river_timber_mud_v1",
+      "memory_budget_tag": "prop_mid",
+      "source": "procedural_modular_kit"
+    },
+    "river_water_plane": {
+      "lod_meshes": [
+        "res://assets/environment/river/river_water_plane_lod0.tscn",
+        "res://assets/environment/river/river_water_plane_lod1.tscn"
+      ],
+      "collision_mesh": "res://assets/environment/river/river_water_plane_collision.tres",
+      "material_set": "river_surface_shader_v1",
+      "memory_budget_tag": "vfx_surface",
+      "source": "procedural_modular_kit"
+    },
+    "village_crates_cluster": {
+      "lod_meshes": [
+        "res://assets/environment/village/village_crates_cluster_lod0.tscn",
+        "res://assets/environment/village/village_crates_cluster_lod1.tscn"
+      ],
+      "collision_mesh": "res://assets/environment/village/village_crates_cluster_collision.tres",
+      "material_set": "village_wood_clutter_v1",
+      "memory_budget_tag": "prop_repeat",
+      "source": "procedural_modular_kit"
+    },
+    "village_hut_east_01": {
+      "lod_meshes": [
+        "res://assets/environment/village/village_hut_east_01_lod0.tscn",
+        "res://assets/environment/village/village_hut_east_01_lod1.tscn"
+      ],
+      "collision_mesh": "res://assets/environment/village/village_hut_east_01_collision.tres",
+      "material_set": "village_thatch_wood_v2",
+      "memory_budget_tag": "structure_mid",
+      "source": "procedural_modular_kit"
+    },
+    "village_hut_east_02": {
+      "lod_meshes": [
+        "res://assets/environment/village/village_hut_east_02_lod0.tscn",
+        "res://assets/environment/village/village_hut_east_02_lod1.tscn"
+      ],
+      "collision_mesh": "res://assets/environment/village/village_hut_east_02_collision.tres",
+      "material_set": "village_thatch_wood_v2",
+      "memory_budget_tag": "structure_mid",
+      "source": "procedural_modular_kit"
+    },
+    "village_hut_elder": {
+      "lod_meshes": [
+        "res://assets/environment/village/hut_elder_lod0.tscn",
+        "res://assets/environment/village/hut_elder_lod1.tscn"
+      ],
+      "collision_mesh": "res://assets/environment/village/hut_elder_collision.tres",
+      "material_set": "village_thatch_wood_v2",
+      "memory_budget_tag": "structure_hero",
+      "source": "procedural_modular_kit"
+    },
+    "village_hut_west": {
+      "lod_meshes": [
+        "res://assets/environment/village/village_hut_west_lod0.tscn",
+        "res://assets/environment/village/village_hut_west_lod1.tscn"
+      ],
+      "collision_mesh": "res://assets/environment/village/village_hut_west_collision.tres",
+      "material_set": "village_thatch_wood_v2",
+      "memory_budget_tag": "structure_mid",
+      "source": "procedural_modular_kit"
+    },
+    "village_market_hall": {
+      "lod_meshes": [
+        "res://assets/environment/village/market_hall_lod0.tscn",
+        "res://assets/environment/village/market_hall_lod1.tscn"
+      ],
+      "collision_mesh": "res://assets/environment/village/market_hall_collision.tres",
+      "material_set": "village_market_wood_cloth_v2",
+      "memory_budget_tag": "structure_hero",
+      "source": "procedural_modular_kit"
+    },
+    "village_market_stall_01": {
+      "lod_meshes": [
+        "res://assets/environment/village/market_stall_lod0.tscn",
+        "res://assets/environment/village/market_stall_lod1.tscn"
+      ],
+      "collision_mesh": "res://assets/environment/village/market_stall_collision.tres",
+      "material_set": "village_market_wood_cloth_v2",
+      "memory_budget_tag": "prop_repeat",
+      "source": "procedural_modular_kit"
+    },
+    "village_market_stall_02": {
+      "lod_meshes": [
+        "res://assets/environment/village/village_market_stall_02_lod0.tscn",
+        "res://assets/environment/village/village_market_stall_02_lod1.tscn"
+      ],
+      "collision_mesh": "res://assets/environment/village/village_market_stall_02_collision.tres",
+      "material_set": "village_market_wood_cloth_v2",
+      "memory_budget_tag": "prop_repeat",
+      "source": "procedural_modular_kit"
+    },
+    "village_well": {
+      "lod_meshes": [
+        "res://assets/environment/village/well_lod0.tscn",
+        "res://assets/environment/village/well_lod1.tscn"
+      ],
+      "collision_mesh": "res://assets/environment/village/well_collision.tres",
+      "material_set": "village_stone_wood_v1",
+      "memory_budget_tag": "prop_hero",
+      "source": "procedural_modular_kit"
+    }
+  }
+}

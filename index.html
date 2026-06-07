@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NAM: Echoes of the Jungle — 1968</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' fill='%230b120c'/%3E%3Cpath d='M12 45c10-19 26-25 40-26-8 7-13 14-15 26H12Z' fill='%23829a49'/%3E%3Cpath d='M18 50h28' stroke='%23d8c26a' stroke-width='5' stroke-linecap='round'/%3E%3C/svg%3E">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- ── OVERLAY SCREENS ── -->
+  <div id="overlay">
+    <div id="menu-screen">
+      <div class="title-block">
+        <div class="subtitle-top">SOUTH-EAST ASIA · 1968</div>
+        <h1 class="title-main">NAM</h1>
+        <div class="subtitle-bottom">ECHOES OF THE JUNGLE</div>
+      </div>
+      <div class="menu-body">
+        <p class="lore-text">
+          Your helicopter went down in rural southern Vietnam.<br>
+          Your squad is scattered. Some may still be alive.<br><br>
+          <em>Find your people. Build trust. Reach the nearest ARVN base together.</em>
+        </p>
+        <button class="btn" id="btn-start">BEGIN MISSION</button>
+        <button class="btn btn-secondary" id="btn-controls">CONTROLS</button>
+      </div>
+    </div>
+
+    <div id="controls-screen" class="hidden">
+      <h2>CONTROLS</h2>
+      <div class="ctrl-grid">
+        <span>W A S D</span><span>Move</span>
+        <span>MOUSE</span><span>Look</span>
+        <span>SHIFT</span><span>Sprint</span>
+        <span>CTRL</span><span>Crouch</span>
+        <span>SPACE</span><span>Jump</span>
+        <span>LEFT CLICK</span><span>Fire</span>
+        <span>RIGHT CLICK</span><span>Aim (zoom)</span>
+        <span>R</span><span>Reload</span>
+        <span>E</span><span>Interact / Talk</span>
+        <span>G</span><span>Throw Grenade</span>
+        <span>1 / 2 / 3</span><span>Switch Weapon</span>
+        <span>I</span><span>Inventory</span>
+        <span>J</span><span>Mission Journal</span>
+        <span>ESC</span><span>Pause / Release Mouse</span>
+      </div>
+      <div class="gfx-row">
+        <label for="gfx-quality">GRAPHICS</label>
+        <select id="gfx-quality" class="gfx-select">
+          <option value="auto">AUTO</option>
+          <option value="low">LOW</option>
+          <option value="medium">MEDIUM</option>
+          <option value="high">HIGH</option>
+        </select>
+      </div>
+      <button class="btn btn-secondary" id="btn-back">BACK</button>
+    </div>
+
+    <div id="pause-screen" class="hidden">
+      <h2>— PAUSED —</h2>
+      <button class="btn" id="btn-resume">RESUME</button>
+      <button class="btn btn-secondary" id="btn-to-menu">MAIN MENU</button>
+    </div>
+
+    <div id="death-screen" class="hidden">
+      <h2 class="death-title">KIA</h2>
+      <p>Sergeant Miller has been killed in action.</p>
+      <button class="btn" id="btn-respawn">RESPAWN AT LAST CHECKPOINT</button>
+    </div>
+
+    <div id="win-screen" class="hidden">
+      <h2 class="win-title">MISSION COMPLETE</h2>
+      <p>You made it out. <br>Not everyone does.</p>
+      <div id="win-stats"></div>
+      <button class="btn" id="btn-restart">PLAY AGAIN</button>
+    </div>
+  </div>
+
+  <!-- ── CLICK-TO-PLAY PROMPT ── -->
+  <div id="lock-prompt" class="hidden">
+    <div class="lock-inner">
+      <p id="lock-prompt-text">CLICK TO START</p>
+      <p style="font-size:10px;color:#6e7a52;margin-top:8px;letter-spacing:2px">MOUSE WILL BE CAPTURED</p>
+    </div>
+  </div>
+
+  <!-- ── HUD ── -->
+  <div id="hud" class="hidden">
+    <!-- Status bars (top-left) -->
+    <div id="status-panel">
+      <div class="stat-row">
+        <span class="stat-lbl">HP</span>
+        <div class="bar-track"><div id="bar-hp" class="bar hp-bar"></div></div>
+        <span class="stat-val" id="val-hp">100</span>
+      </div>
+      <div class="stat-row">
+        <span class="stat-lbl">MORALE</span>
+        <div class="bar-track"><div id="bar-morale" class="bar morale-bar"></div></div>
+        <span class="stat-val" id="val-morale">80</span>
+      </div>
+      <div class="stat-row">
+        <span class="stat-lbl">STAM</span>
+        <div class="bar-track"><div id="bar-stam" class="bar stam-bar"></div></div>
+      </div>
+    </div>
+
+    <!-- Weapon display (bottom-right) -->
+    <div id="weapon-panel">
+      <div id="weapon-name">M16A1</div>
+      <div id="ammo-display"><span id="ammo-mag">30</span> / <span id="ammo-reserve">120</span></div>
+      <div id="grenade-display">FRAG <span id="grenade-count">3</span></div>
+    </div>
+
+    <!-- Objectives (top-right) -->
+    <div id="objectives-panel">
+      <div class="panel-title">OBJECTIVES</div>
+      <ul id="obj-list"></ul>
+    </div>
+
+    <!-- Companion status (top-right below objectives) -->
+    <div id="companions-panel">
+      <div class="panel-title">SQUAD</div>
+      <ul id="companion-list"></ul>
+    </div>
+
+    <!-- Compass (top-center) -->
+    <div id="compass">
+      <div id="compass-rose">
+        <span>N</span><span>NE</span><span>E</span><span>SE</span><span>S</span><span>SW</span><span>W</span><span>NW</span>
+      </div>
+      <div id="compass-marker">V</div>
+    </div>
+
+    <!-- Crosshair -->
+    <div id="crosshair">
+      <div class="ch-h"></div>
+      <div class="ch-v"></div>
+    </div>
+
+    <!-- Interact prompt (center-bottom) -->
+    <div id="interact-prompt" class="hidden">
+      <span class="key-hint">[E]</span> <span id="interact-label">Interact</span>
+    </div>
+
+    <!-- Hit flash -->
+    <div id="hit-flash"></div>
+
+    <!-- Damage direction indicator -->
+    <div id="dmg-indicator"></div>
+
+    <!-- Notifications -->
+    <div id="notifications"></div>
+
+    <!-- XP bar (bottom-center) -->
+    <div id="xp-bar-container">
+      <div class="xp-lbl">LVL <span id="player-level">1</span></div>
+      <div class="bar-track-xp"><div id="bar-xp" class="bar xp-bar"></div></div>
+    </div>
+
+    <!-- Stamina sprint warning -->
+    <div id="sprint-warning" class="hidden">EXHAUSTED</div>
+  </div>
+
+  <!-- ── DIALOGUE UI ── -->
+  <div id="dialogue-ui" class="hidden">
+    <div id="dlg-portrait"></div>
+    <div id="dlg-content">
+      <div id="dlg-name"></div>
+      <div id="dlg-text"></div>
+      <div id="dlg-choices"></div>
+    </div>
+  </div>
+
+  <!-- ── INVENTORY UI ── -->
+  <div id="inventory-ui" class="hidden">
+    <div class="ui-panel" id="inv-panel">
+      <h3>INVENTORY</h3>
+      <div id="inv-grid"></div>
+      <div id="inv-desc"></div>
+    </div>
+    <div class="ui-panel" id="stats-panel">
+      <h3>DOSSIER: SGT. MILLER</h3>
+      <div id="stats-display"></div>
+      <h3 style="margin-top:16px">CIVILIAN TRUST</h3>
+      <div id="moral-display"></div>
+    </div>
+    <button class="btn btn-small" id="btn-inv-close">[I] CLOSE</button>
+  </div>
+
+  <!-- ── JOURNAL UI ── -->
+  <div id="journal-ui" class="hidden">
+    <div class="ui-panel">
+      <h3>MISSION JOURNAL</h3>
+      <div id="journal-content"></div>
+    </div>
+    <button class="btn btn-small" id="btn-journal-close">[J] CLOSE</button>
+  </div>
+
+  <!-- ── THREE.JS CANVAS ── -->
+  <canvas id="game-canvas"></canvas>
+
+  <script type="module" src="js/game.js"></script>
+</body>
+</html>

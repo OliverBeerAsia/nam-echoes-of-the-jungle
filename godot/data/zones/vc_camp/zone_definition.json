@@ -1,0 +1,217 @@
+{
+  "zone_id": "vc_camp",
+  "terrain_material_set": "terrain_camp_dirt_v1",
+  "foliage_profile_id": "jungle_military_clearings_v1",
+  "light_rig_id": "camp_dusk",
+  "ambience_profile_id": "camp_tension_bed",
+  "prop_groups": [
+    {
+      "group_id": "camp_structures",
+      "asset_set": "camp_structure_set_a",
+      "anchors": [
+        {
+          "asset_id": "camp_command_bunker",
+          "position": [
+            -54,
+            0,
+            -28
+          ],
+          "rotation_y": 0,
+          "scale": [
+            1,
+            1,
+            1
+          ],
+          "proxy_size": [
+            7.0,
+            3.5,
+            5.0
+          ]
+        },
+        {
+          "asset_id": "camp_radio_post",
+          "position": [
+            -44,
+            0,
+            -44
+          ],
+          "rotation_y": 0,
+          "scale": [
+            1,
+            1,
+            1
+          ],
+          "proxy_size": [
+            5.0,
+            4.5,
+            4.0
+          ]
+        },
+        {
+          "asset_id": "camp_prison_cage",
+          "position": [
+            -40,
+            0,
+            -32
+          ],
+          "rotation_y": 0,
+          "scale": [
+            1,
+            1,
+            1
+          ],
+          "proxy_size": [
+            4.0,
+            2.5,
+            4.0
+          ]
+        }
+      ]
+    },
+    {
+      "group_id": "camp_defenses",
+      "asset_set": "camp_fortifications",
+      "anchors": [
+        {
+          "asset_id": "camp_watchtower",
+          "position": [
+            -68,
+            0,
+            -26
+          ],
+          "rotation_y": 0,
+          "scale": [
+            1,
+            1,
+            1
+          ],
+          "proxy_size": [
+            3.2,
+            7.8,
+            3.2
+          ]
+        },
+        {
+          "asset_id": "camp_sandbag_line_01",
+          "position": [
+            -50,
+            0,
+            -32
+          ],
+          "rotation_y": 0,
+          "scale": [
+            1,
+            1,
+            1
+          ],
+          "proxy_size": [
+            6.5,
+            1.2,
+            1.2
+          ]
+        },
+        {
+          "asset_id": "camp_sandbag_line_02",
+          "position": [
+            -38,
+            0,
+            -38
+          ],
+          "rotation_y": 90,
+          "scale": [
+            1,
+            1,
+            1
+          ],
+          "proxy_size": [
+            5.5,
+            1.2,
+            1.2
+          ]
+        }
+      ]
+    }
+  ],
+  "npc_spawns": [
+    {
+      "name": "Rodriguez",
+      "profile_id": "rodriguez",
+      "state": "injured",
+      "position": [
+        -40,
+        0,
+        -32
+      ],
+      "rotation_y": 180
+    },
+    {
+      "name": "Camp Guard",
+      "profile_id": "camp_guard",
+      "state": "guard_idle",
+      "position": [
+        -46,
+        0,
+        -39
+      ],
+      "rotation_y": 32
+    },
+    {
+      "name": "Camp Sentry",
+      "profile_id": "camp_guard",
+      "state": "guard_idle",
+      "position": [
+        -58,
+        0,
+        -30
+      ],
+      "rotation_y": 112
+    }
+  ],
+  "atmosphere_profile_id": "camp_hostile_perimeter_v1",
+  "quest_readability": {
+    "primary_route_hint": "Find Rodriguez and secure extraction route",
+    "landmarks": [
+      {
+        "id": "prison_cage",
+        "label": "Prison Cage",
+        "position": [
+          -40.0,
+          0.12,
+          -32.0
+        ],
+        "color": "#d26b62"
+      },
+      {
+        "id": "radio_post",
+        "label": "Radio Mast",
+        "position": [
+          -44.0,
+          0.12,
+          -44.0
+        ],
+        "color": "#95adc9"
+      }
+    ],
+    "interactables": [
+      {
+        "id": "rodriguez",
+        "position": [
+          -40.0,
+          0.2,
+          -32.0
+        ],
+        "prompt": "Free Rodriguez"
+      },
+      {
+        "id": "supply_cache",
+        "position": [
+          -54.0,
+          0.2,
+          -28.0
+        ],
+        "prompt": "Search bunker cache"
+      }
+    ],
+    "sightline_budget_m": 42
+  }
+}

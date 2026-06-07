@@ -1,0 +1,714 @@
+{
+  "schema_version": "1.0.0",
+  "source": "js/config.js",
+  "generated_at": "2026-03-01T12:06:20.730Z",
+  "quests": [
+    {
+      "id": "aftershock",
+      "title": "Aftershock",
+      "desc": "Recover your bearings after the crash and reach the village alive.",
+      "objectives": [
+        {
+          "id": "recover_map",
+          "text": "Recover your map fragment from the crash site",
+          "optional": false
+        },
+        {
+          "id": "find_village",
+          "text": "Reach the nearby village",
+          "optional": false
+        }
+      ]
+    },
+    {
+      "id": "hearts_of_the_village",
+      "title": "Hearts of the Village",
+      "desc": "Build trust with local civilians to unlock routes and squad intel.",
+      "objectives": [
+        {
+          "id": "talk_elder",
+          "text": "Speak with Elder Nguyen",
+          "optional": false
+        },
+        {
+          "id": "secure_local_trust",
+          "text": "Gain local trust",
+          "optional": false
+        },
+        {
+          "id": "help_thanh",
+          "text": "[Optional] Help Thanh reunite with Duc",
+          "optional": true
+        }
+      ]
+    },
+    {
+      "id": "rescue",
+      "title": "Leave No One Behind",
+      "desc": "Locate the VC camp and rescue Pvt. Rodriguez.",
+      "objectives": [
+        {
+          "id": "find_camp",
+          "text": "Locate the VC camp",
+          "optional": false
+        },
+        {
+          "id": "kill_radio",
+          "text": "[Optional] Destroy the radio tower",
+          "optional": true
+        },
+        {
+          "id": "free_pow",
+          "text": "Rescue Pvt. Rodriguez",
+          "optional": false
+        }
+      ]
+    },
+    {
+      "id": "medic_down",
+      "title": "Medic Down",
+      "desc": "Track down Cpl. Whitaker near the abandoned mission clinic.",
+      "objectives": [
+        {
+          "id": "locate_clinic",
+          "text": "Locate the mission clinic",
+          "optional": false
+        },
+        {
+          "id": "reach_whitaker",
+          "text": "Reach Cpl. Whitaker",
+          "optional": false
+        }
+      ]
+    },
+    {
+      "id": "field_surgery",
+      "title": "Field Surgery",
+      "desc": "Get medical supplies and stabilize Whitaker for movement.",
+      "objectives": [
+        {
+          "id": "obtain_field_kit",
+          "text": "Obtain a field treatment kit",
+          "optional": false
+        },
+        {
+          "id": "stabilize_whitaker",
+          "text": "Stabilize Whitaker for travel",
+          "optional": false
+        }
+      ]
+    },
+    {
+      "id": "silent_crossing",
+      "title": "Silent Crossing",
+      "desc": "Secure a river crossing route for the regrouped squad.",
+      "objectives": [
+        {
+          "id": "secure_ferry_pass",
+          "text": "Secure passage at the ferry crossing",
+          "optional": false
+        },
+        {
+          "id": "cross_river",
+          "text": "Cross the river corridor",
+          "optional": false
+        }
+      ]
+    },
+    {
+      "id": "radio_ghost",
+      "title": "Radio Ghost",
+      "desc": "Find Specialist Hale and convince him to rejoin the team.",
+      "objectives": [
+        {
+          "id": "find_hale",
+          "text": "Find Specialist Hale near the river hamlet",
+          "optional": false
+        },
+        {
+          "id": "convince_hale",
+          "text": "Convince Hale to move with the squad",
+          "optional": false
+        }
+      ]
+    },
+    {
+      "id": "convoy_to_arvn",
+      "title": "Convoy to ARVN",
+      "desc": "Move the regrouped squad through hostile territory to ARVN lines.",
+      "objectives": [
+        {
+          "id": "regroup_team",
+          "text": "Regroup all surviving squadmates",
+          "optional": false
+        },
+        {
+          "id": "reach_arvn",
+          "text": "Reach the ARVN perimeter",
+          "optional": false
+        }
+      ]
+    },
+    {
+      "id": "last_checkpoint",
+      "title": "Last Checkpoint",
+      "desc": "Clear final checkpoint protocol and enter the ARVN outpost.",
+      "objectives": [
+        {
+          "id": "resolve_checkpoint",
+          "text": "Resolve gate protocol with Sgt. Kiet",
+          "optional": false
+        },
+        {
+          "id": "enter_arvn",
+          "text": "Enter the ARVN outpost",
+          "optional": false
+        }
+      ]
+    }
+  ],
+  "dialogue": [
+    {
+      "id": "elder",
+      "name": "Elder Nguyen Van Tho",
+      "portrait": "👴",
+      "nodes": {
+        "root": {
+          "text": "You survived the crash. Many do not. Sit, soldier. Speak clearly, and perhaps this village can help.",
+          "choices": [
+            {
+              "label": "Any word of my squad?",
+              "go": "survivors"
+            },
+            {
+              "label": "I need the village to trust me.",
+              "go": "trust"
+            },
+            {
+              "label": "Where is the VC camp?",
+              "go": "camp"
+            }
+          ]
+        },
+        "survivors": {
+          "text": "One American is caged in the VC camp. Another was seen near the old mission clinic. A radio man hides by the eastern river hamlet.",
+          "choices": [
+            {
+              "label": "I will bring them home.",
+              "go": "end",
+              "actions": [
+                "setFlag:talked_elder",
+                "completeObjective:hearts_of_the_village:talk_elder",
+                "startQuest:rescue",
+                "startQuest:medic_down"
+              ]
+            }
+          ]
+        },
+        "trust": {
+          "text": "Trust is earned here, not demanded. Talk to Thanh, Binh, and Father Bao. Help one family and ten will remember.",
+          "choices": [
+            {
+              "label": "I understand.",
+              "go": "end",
+              "actions": [
+                "setFlag:talked_elder",
+                "completeObjective:hearts_of_the_village:talk_elder",
+                "startQuest:rescue",
+                "startQuest:medic_down"
+              ]
+            }
+          ]
+        },
+        "camp": {
+          "text": "Northwest path, beyond the ridge and wire. They keep your man in a cage. If the radio tower stands, reinforcements will come quickly.",
+          "choices": [
+            {
+              "label": "Then I move now.",
+              "go": "end",
+              "actions": [
+                "setFlag:talked_elder",
+                "completeObjective:hearts_of_the_village:talk_elder",
+                "startQuest:rescue"
+              ]
+            }
+          ]
+        },
+        "end": {
+          "text": "Go carefully. Bring your men back, and do not make enemies of everyone in this valley.",
+          "choices": []
+        }
+      }
+    },
+    {
+      "id": "thanh",
+      "name": "Thanh",
+      "portrait": "👩",
+      "nodes": {
+        "root": {
+          "text": "The jungle carries sound. You move like a storm, soldier. If you want help, you pay in trust.",
+          "choices": [
+            {
+              "label": "Help me reach the camp unseen.",
+              "go": "deal"
+            },
+            {
+              "label": "Tell me about your brother Duc.",
+              "go": "duc"
+            }
+          ]
+        },
+        "deal": {
+          "text": "The tunnels can take you around their patrols. Bring my brother Duc back, and I will mark a safe route for you.",
+          "choices": [
+            {
+              "label": "Deal. I'll find Duc.",
+              "go": "route",
+              "actions": [
+                "setFlag:find_duc",
+                "revealNpc:duc"
+              ]
+            },
+            {
+              "label": "I can't promise that.",
+              "go": "cold"
+            }
+          ]
+        },
+        "duc": {
+          "text": "He is young and stubborn. They grabbed him near the storage huts at the camp. If he still breathes, he will be there.",
+          "choices": [
+            {
+              "label": "I will look for him.",
+              "go": "route",
+              "actions": [
+                "setFlag:find_duc",
+                "revealNpc:duc"
+              ]
+            }
+          ]
+        },
+        "route": {
+          "text": "Take the narrow gully northeast of the market, then cut west at the three palms. Less noise, fewer rifles.",
+          "choices": [
+            {
+              "label": "Understood.",
+              "go": null,
+              "actions": [
+                "setFlag:tunnel_access",
+                "completeObjective:hearts_of_the_village:secure_local_trust",
+                "resolution:nonviolent",
+                "adjustTrust:6"
+              ]
+            }
+          ]
+        },
+        "cold": {
+          "text": "Then do not expect my people to risk themselves for you.",
+          "choices": [
+            {
+              "label": "Fair.",
+              "go": null
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "binh",
+      "name": "Binh",
+      "portrait": "🧢",
+      "nodes": {
+        "root": {
+          "text": "You are the downed American, yes? People here are split. Some want to help, some want you gone.",
+          "choices": [
+            {
+              "label": "Help me calm the village. I need guides, not fear.",
+              "go": null,
+              "actions": [
+                "completeObjective:hearts_of_the_village:secure_local_trust",
+                "resolution:nonviolent",
+                "adjustTrust:4"
+              ]
+            },
+            {
+              "label": "I am not asking. You will cooperate.",
+              "go": null,
+              "actions": [
+                "setFlag:binh_coerced",
+                "completeObjective:hearts_of_the_village:secure_local_trust",
+                "resolution:violent",
+                "adjustTrust:-8"
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "father_bao",
+      "name": "Father Bao",
+      "portrait": "⛪",
+      "nodes": {
+        "root": {
+          "text": "Our mission clinic is ruined, but one of your men was carried there at dawn. He was bleeding badly.",
+          "choices": [
+            {
+              "label": "Show me the clinic route.",
+              "go": null,
+              "actions": [
+                "setFlag:clinic_tip",
+                "startQuest:medic_down"
+              ]
+            },
+            {
+              "label": "What condition was he in?",
+              "go": "status"
+            }
+          ]
+        },
+        "status": {
+          "text": "Conscious, but fading. If he is still alive, he needs a treatment kit before he can walk.",
+          "choices": [
+            {
+              "label": "I am moving now.",
+              "go": null,
+              "actions": [
+                "startQuest:medic_down"
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "sister_lan",
+      "name": "Sister Lan",
+      "portrait": "🩺",
+      "nodes": {
+        "root": {
+          "text": "If this is about your medic, I still have one field kit. But I will not hand it to someone who burns through villages.",
+          "choices": [
+            {
+              "label": "I will cover your civilians. Give me the kit.",
+              "go": null,
+              "actions": [
+                "setFlag:field_kit",
+                "startQuest:field_surgery",
+                "completeObjective:field_surgery:obtain_field_kit",
+                "resolution:nonviolent",
+                "adjustTrust:8"
+              ]
+            },
+            {
+              "label": "I am taking the kit now.",
+              "go": null,
+              "actions": [
+                "setFlag:field_kit",
+                "startQuest:field_surgery",
+                "completeObjective:field_surgery:obtain_field_kit",
+                "resolution:violent",
+                "adjustTrust:-10"
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "rodriguez",
+      "name": "Pvt. E. Rodriguez",
+      "portrait": "🪖",
+      "nodes": {
+        "caged": {
+          "text": "Sarge?! I thought you were KIA. They keep rotating guards and calling for backup. We have to move now.",
+          "choices": [
+            {
+              "label": "I'm getting you out.",
+              "go": "freed",
+              "actions": [
+                "setFlag:rodriguez_freed",
+                "joinCompanion:rodriguez",
+                "startQuest:rescue",
+                "completeObjective:rescue:free_pow",
+                "startQuest:medic_down",
+                "resolution:nonviolent",
+                "adjustTrust:3"
+              ]
+            }
+          ]
+        },
+        "freed": {
+          "text": "Good to breathe outside that cage. If Whitaker is still alive, he will be at the old clinic. Hale was moving east last I heard.",
+          "choices": [
+            {
+              "label": "Let's regroup the whole squad.",
+              "go": null
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "duc",
+      "name": "Duc (Thanh's Brother)",
+      "portrait": "👦",
+      "nodes": {
+        "root": {
+          "text": "Please, please do not leave me here. I only carried rice because they threatened my family.",
+          "choices": [
+            {
+              "label": "You're coming with me.",
+              "go": "freed",
+              "actions": [
+                "setFlag:duc_freed",
+                "completeObjective:hearts_of_the_village:help_thanh",
+                "completeObjective:hearts_of_the_village:secure_local_trust",
+                "resolution:nonviolent",
+                "adjustTrust:10",
+                "xp:75"
+              ]
+            },
+            {
+              "label": "Stay down. I will clear your path.",
+              "go": null
+            }
+          ]
+        },
+        "freed": {
+          "text": "Thanh will not believe this... thank you. I will run for the village now.",
+          "choices": [
+            {
+              "label": "Go. Stay low.",
+              "go": null
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "cpl_whitaker",
+      "name": "Cpl. Dana Whitaker",
+      "portrait": "💉",
+      "nodes": {
+        "wounded": {
+          "text": "Miller...? I took shrapnel in the hip. I can shoot, but I cannot march without treatment.",
+          "choices": [
+            {
+              "label": "Hold on. I will get a field kit.",
+              "go": null,
+              "actions": [
+                "startQuest:field_surgery"
+              ]
+            }
+          ]
+        },
+        "stable": {
+          "text": "You got the kit. Give me thirty seconds and some pressure bandage work.",
+          "choices": [
+            {
+              "label": "Patch up and move. We regroup at ARVN.",
+              "go": "joined",
+              "actions": [
+                "setFlag:whitaker_stabilized",
+                "joinCompanion:cpl_whitaker",
+                "completeObjective:medic_down:reach_whitaker",
+                "completeObjective:field_surgery:stabilize_whitaker",
+                "startQuest:silent_crossing",
+                "resolution:nonviolent"
+              ]
+            }
+          ]
+        },
+        "joined": {
+          "text": "Leg is ugly, but serviceable. Point me at the crossing and keep me off open ground.",
+          "choices": [
+            {
+              "label": "Stay close.",
+              "go": null
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "ferryman_huy",
+      "name": "Ferryman Huy",
+      "portrait": "🚤",
+      "nodes": {
+        "root": {
+          "text": "River is watched. I can move people quietly, but I do not move killers for free.",
+          "choices": [
+            {
+              "label": "We protect your people. Get us across.",
+              "go": null,
+              "actions": [
+                "setFlag:ferry_pass",
+                "completeObjective:silent_crossing:secure_ferry_pass",
+                "resolution:nonviolent",
+                "adjustTrust:4"
+              ]
+            },
+            {
+              "label": "Move the boat now. No more talking.",
+              "go": null,
+              "actions": [
+                "setFlag:ferry_forced",
+                "completeObjective:silent_crossing:secure_ferry_pass",
+                "resolution:violent",
+                "adjustTrust:-7"
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "mai",
+      "name": "Mai",
+      "portrait": "🧺",
+      "nodes": {
+        "root": {
+          "text": "Hale is hiding near the rice sheds. He will not move because civilians are trapped on the road.",
+          "choices": [
+            {
+              "label": "I will cover the convoy and get them through.",
+              "go": null,
+              "actions": [
+                "setFlag:convoy_protected",
+                "resolution:nonviolent",
+                "adjustTrust:7"
+              ]
+            },
+            {
+              "label": "I cannot stop for civilians now.",
+              "go": null,
+              "actions": [
+                "setFlag:convoy_abandoned",
+                "resolution:violent",
+                "adjustTrust:-9"
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "spc_hale",
+      "name": "Spc. Owen Hale",
+      "portrait": "📻",
+      "nodes": {
+        "root": {
+          "text": "I heard what happened at the camp. I am not moving until those civilians are clear. I will not repeat Da Nang.",
+          "choices": [
+            {
+              "label": "Understood. I will clear the convoy route.",
+              "go": null
+            },
+            {
+              "label": "Orders are orders. Move now.",
+              "go": "joined",
+              "actions": [
+                "completeObjective:radio_ghost:convince_hale",
+                "joinCompanion:spc_hale",
+                "startQuest:convoy_to_arvn",
+                "resolution:violent",
+                "adjustTrust:-8"
+              ]
+            }
+          ]
+        },
+        "ready": {
+          "text": "Mai told me you covered them. That is enough for me. I am back on the net and ready to move.",
+          "choices": [
+            {
+              "label": "Fall in. ARVN perimeter is next.",
+              "go": "joined",
+              "actions": [
+                "completeObjective:radio_ghost:convince_hale",
+                "joinCompanion:spc_hale",
+                "startQuest:convoy_to_arvn",
+                "resolution:nonviolent",
+                "adjustTrust:5"
+              ]
+            }
+          ]
+        },
+        "joined": {
+          "text": "Radio check green. I can warn us before patrols close in. Let us finish this.",
+          "choices": [
+            {
+              "label": "Move out.",
+              "go": null
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "lt_pham",
+      "name": "Lt. Pham",
+      "portrait": "🎖",
+      "nodes": {
+        "root": {
+          "text": "You made it farther than most. Gate discipline is strict tonight. Speak with Sgt. Kiet and keep your people together.",
+          "choices": [
+            {
+              "label": "We have wounded and civilians with us.",
+              "go": null,
+              "actions": [
+                "setFlag:pham_briefed",
+                "adjustTrust:3"
+              ]
+            },
+            {
+              "label": "Understood. I will clear the checkpoint.",
+              "go": null
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "sgt_kiet",
+      "name": "Sgt. Kiet",
+      "portrait": "🛡",
+      "nodes": {
+        "root": {
+          "text": "Hold position at the wire. I need a clean account before I open this gate.",
+          "choices": [
+            {
+              "label": "Lt. Pham has our report. Open for regroup.",
+              "go": "resolved",
+              "actions": [
+                "setFlag:checkpoint_resolved",
+                "completeObjective:last_checkpoint:resolve_checkpoint",
+                "resolution:nonviolent",
+                "adjustTrust:4"
+              ]
+            },
+            {
+              "label": "Open the gate now, Sergeant.",
+              "go": "resolved",
+              "actions": [
+                "setFlag:checkpoint_resolved",
+                "completeObjective:last_checkpoint:resolve_checkpoint",
+                "resolution:violent",
+                "adjustTrust:-6"
+              ]
+            }
+          ]
+        },
+        "resolved": {
+          "text": "Checkpoint cleared. Bring your people forward and signal at the command post.",
+          "choices": [
+            {
+              "label": "Moving in.",
+              "go": null
+            }
+          ]
+        }
+      }
+    }
+  ]
+}

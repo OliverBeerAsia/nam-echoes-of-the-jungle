@@ -1,0 +1,274 @@
+{
+  "zone_id": "river_crossing",
+  "terrain_material_set": "terrain_river_mud_v2",
+  "foliage_profile_id": "riverbank_dense_v1",
+  "light_rig_id": "river_dusk",
+  "ambience_profile_id": "river_current_and_insects",
+  "prop_groups": [
+    {
+      "group_id": "river_crossing_core",
+      "asset_set": "river_ferry_set_a",
+      "anchors": [
+        {
+          "asset_id": "river_water_plane",
+          "position": [
+            83,
+            0,
+            -6
+          ],
+          "rotation_y": 0,
+          "scale": [
+            1,
+            1,
+            1
+          ],
+          "proxy_size": [
+            30.0,
+            0.2,
+            14.0
+          ]
+        },
+        {
+          "asset_id": "river_dock_platform",
+          "position": [
+            80,
+            0,
+            -3
+          ],
+          "rotation_y": 12,
+          "scale": [
+            1,
+            1,
+            1
+          ],
+          "proxy_size": [
+            5.2,
+            1.4,
+            3.2
+          ]
+        },
+        {
+          "asset_id": "river_ferry_post_east",
+          "position": [
+            85,
+            0,
+            -8
+          ],
+          "rotation_y": 0,
+          "scale": [
+            1,
+            1,
+            1
+          ],
+          "proxy_size": [
+            1.1,
+            2.4,
+            1.1
+          ]
+        },
+        {
+          "asset_id": "river_ferry_post_west",
+          "position": [
+            78,
+            0,
+            -4
+          ],
+          "rotation_y": 0,
+          "scale": [
+            1,
+            1,
+            1
+          ],
+          "proxy_size": [
+            1.1,
+            2.4,
+            1.1
+          ]
+        },
+        {
+          "asset_id": "river_boat",
+          "position": [
+            89,
+            0,
+            6
+          ],
+          "rotation_y": -14,
+          "scale": [
+            1,
+            1,
+            1
+          ],
+          "proxy_size": [
+            3.4,
+            1.2,
+            1.9
+          ]
+        }
+      ]
+    },
+    {
+      "group_id": "river_crossing_support",
+      "asset_set": "river_crossing_support_props",
+      "anchors": [
+        {
+          "asset_id": "river_rope_winch",
+          "position": [
+            86,
+            0,
+            -10
+          ],
+          "rotation_y": 22,
+          "scale": [
+            1,
+            1,
+            1
+          ],
+          "proxy_size": [
+            1.8,
+            1.2,
+            1.3
+          ]
+        },
+        {
+          "asset_id": "river_crate_cluster",
+          "position": [
+            81,
+            0,
+            -7
+          ],
+          "rotation_y": -9,
+          "scale": [
+            1,
+            1,
+            1
+          ],
+          "proxy_size": [
+            2.2,
+            1.4,
+            1.6
+          ]
+        },
+        {
+          "asset_id": "river_lantern_post_01",
+          "position": [
+            78,
+            0,
+            -2
+          ],
+          "rotation_y": 0,
+          "scale": [
+            1,
+            1,
+            1
+          ],
+          "proxy_size": [
+            1.0,
+            3.1,
+            1.0
+          ]
+        },
+        {
+          "asset_id": "river_lantern_post_02",
+          "position": [
+            86,
+            0,
+            -1
+          ],
+          "rotation_y": 0,
+          "scale": [
+            1,
+            1,
+            1
+          ],
+          "proxy_size": [
+            1.0,
+            3.1,
+            1.0
+          ]
+        }
+      ]
+    }
+  ],
+  "npc_spawns": [
+    {
+      "name": "Ferryman Huy",
+      "profile_id": "ferryman_huy",
+      "state": "idle_talk",
+      "position": [
+        82,
+        0,
+        -2
+      ],
+      "rotation_y": 155
+    },
+    {
+      "name": "Duc",
+      "profile_id": "duc",
+      "state": "alert",
+      "position": [
+        79,
+        0,
+        2
+      ],
+      "rotation_y": 32
+    },
+    {
+      "name": "Binh",
+      "profile_id": "binh",
+      "state": "seated_rest",
+      "position": [
+        87,
+        0,
+        -3
+      ],
+      "rotation_y": -112
+    }
+  ],
+  "atmosphere_profile_id": "river_crossing_mist_v1",
+  "quest_readability": {
+    "primary_route_hint": "Negotiate ferry passage and protect civilians",
+    "landmarks": [
+      {
+        "id": "dock",
+        "label": "Dock",
+        "position": [
+          80.0,
+          0.12,
+          -3.0
+        ],
+        "color": "#99c4bc"
+      },
+      {
+        "id": "boat",
+        "label": "Ferry Boat",
+        "position": [
+          89.0,
+          0.12,
+          6.0
+        ],
+        "color": "#d9c183"
+      }
+    ],
+    "interactables": [
+      {
+        "id": "ferryman_huy",
+        "position": [
+          82.0,
+          0.2,
+          -2.0
+        ],
+        "prompt": "Negotiate with Huy"
+      },
+      {
+        "id": "rope_winch",
+        "position": [
+          86.0,
+          0.2,
+          -10.0
+        ],
+        "prompt": "Operate rope winch"
+      }
+    ],
+    "sightline_budget_m": 52
+  }
+}

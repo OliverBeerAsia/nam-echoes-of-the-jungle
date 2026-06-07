@@ -1,0 +1,280 @@
+{
+  "zone_id": "arvn_outpost",
+  "terrain_material_set": "terrain_outpost_compacted_soil_v1",
+  "foliage_profile_id": "outpost_sparse_v1",
+  "light_rig_id": "outpost_dusk",
+  "ambience_profile_id": "outpost_guard_lines",
+  "prop_groups": [
+    {
+      "group_id": "outpost_core",
+      "asset_set": "outpost_modular_set",
+      "anchors": [
+        {
+          "asset_id": "outpost_gate",
+          "position": [
+            96,
+            0,
+            -64
+          ],
+          "rotation_y": 0,
+          "scale": [
+            1,
+            1,
+            1
+          ],
+          "proxy_size": [
+            5.8,
+            3.2,
+            1.5
+          ]
+        },
+        {
+          "asset_id": "outpost_command_post",
+          "position": [
+            92,
+            0,
+            -72
+          ],
+          "rotation_y": 0,
+          "scale": [
+            1,
+            1,
+            1
+          ],
+          "proxy_size": [
+            7.4,
+            3.8,
+            5.4
+          ]
+        },
+        {
+          "asset_id": "outpost_watch_tower",
+          "position": [
+            102,
+            0,
+            -74
+          ],
+          "rotation_y": 0,
+          "scale": [
+            1,
+            1,
+            1
+          ],
+          "proxy_size": [
+            4.8,
+            7.2,
+            4.2
+          ]
+        },
+        {
+          "asset_id": "outpost_triage_tent",
+          "position": [
+            96,
+            0,
+            -80
+          ],
+          "rotation_y": 0,
+          "scale": [
+            1,
+            1,
+            1
+          ],
+          "proxy_size": [
+            6.2,
+            2.9,
+            4.2
+          ]
+        }
+      ]
+    },
+    {
+      "group_id": "outpost_defenses",
+      "asset_set": "outpost_fortifications",
+      "anchors": [
+        {
+          "asset_id": "outpost_checkpoint_barrier_01",
+          "position": [
+            91,
+            0,
+            -67
+          ],
+          "rotation_y": 0,
+          "scale": [
+            1,
+            1,
+            1
+          ],
+          "proxy_size": [
+            5.2,
+            1.4,
+            0.9
+          ]
+        },
+        {
+          "asset_id": "outpost_checkpoint_barrier_02",
+          "position": [
+            101,
+            0,
+            -67
+          ],
+          "rotation_y": 0,
+          "scale": [
+            1,
+            1,
+            1
+          ],
+          "proxy_size": [
+            5.2,
+            1.4,
+            0.9
+          ]
+        },
+        {
+          "asset_id": "outpost_sandbag_nest",
+          "position": [
+            103,
+            0,
+            -70
+          ],
+          "rotation_y": 36,
+          "scale": [
+            1,
+            1,
+            1
+          ],
+          "proxy_size": [
+            3.6,
+            1.4,
+            3.2
+          ]
+        }
+      ]
+    },
+    {
+      "group_id": "outpost_support",
+      "asset_set": "outpost_signal_set",
+      "anchors": [
+        {
+          "asset_id": "outpost_comms_corner",
+          "position": [
+            89,
+            0,
+            -75
+          ],
+          "rotation_y": 32,
+          "scale": [
+            1,
+            1,
+            1
+          ],
+          "proxy_size": [
+            3.4,
+            2.6,
+            2.4
+          ]
+        },
+        {
+          "asset_id": "outpost_spotlight_mast",
+          "position": [
+            106,
+            0,
+            -67
+          ],
+          "rotation_y": -16,
+          "scale": [
+            1,
+            1,
+            1
+          ],
+          "proxy_size": [
+            1.6,
+            6.4,
+            1.6
+          ]
+        }
+      ]
+    }
+  ],
+  "npc_spawns": [
+    {
+      "name": "Lt. Pham",
+      "profile_id": "lt_pham",
+      "state": "briefing_talk",
+      "position": [
+        94,
+        0,
+        -70
+      ],
+      "rotation_y": 58
+    },
+    {
+      "name": "Sgt. Kiet",
+      "profile_id": "sgt_kiet",
+      "state": "guard_idle",
+      "position": [
+        99,
+        0,
+        -66
+      ],
+      "rotation_y": 178
+    },
+    {
+      "name": "ARVN Sentry",
+      "profile_id": "arvn_sentry",
+      "state": "guard_idle",
+      "position": [
+        104,
+        0,
+        -73
+      ],
+      "rotation_y": -132
+    }
+  ],
+  "atmosphere_profile_id": "outpost_security_grid_v1",
+  "quest_readability": {
+    "primary_route_hint": "Reach checkpoint, brief Lt. Pham, and request escort",
+    "landmarks": [
+      {
+        "id": "outpost_gate",
+        "label": "Checkpoint Gate",
+        "position": [
+          96.0,
+          0.12,
+          -64.0
+        ],
+        "color": "#8eb7ce"
+      },
+      {
+        "id": "command_post",
+        "label": "Command Post",
+        "position": [
+          92.0,
+          0.12,
+          -72.0
+        ],
+        "color": "#d6c188"
+      }
+    ],
+    "interactables": [
+      {
+        "id": "lt_pham",
+        "position": [
+          94.0,
+          0.2,
+          -70.0
+        ],
+        "prompt": "Report to Lt. Pham"
+      },
+      {
+        "id": "checkpoint_manifest",
+        "position": [
+          91.0,
+          0.2,
+          -67.0
+        ],
+        "prompt": "Present crash manifest"
+      }
+    ],
+    "sightline_budget_m": 58
+  }
+}

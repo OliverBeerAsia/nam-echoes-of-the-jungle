@@ -1,0 +1,109 @@
+{
+  "global_default": "dusk_reference",
+  "profiles": {
+    "dusk_reference": {
+      "sun_color": "#f5ba74",
+      "sun_energy": 1.35,
+      "sun_rotation_deg": [-36.0, -42.0, 0.0],
+      "fill_color": "#6f89a6",
+      "fill_energy": 0.28,
+      "fill_rotation_deg": [-20.0, 128.0, 0.0],
+      "sky_color": "#445a44",
+      "fog_color": "#6b7b59",
+      "fog_density": 0.0045,
+      "volumetric_fog": true,
+      "volumetric_fog_density": 0.02
+    },
+    "crash_dusk": {
+      "sun_color": "#e9a768",
+      "sun_energy": 1.15,
+      "sun_rotation_deg": [-34.0, -47.0, 0.0],
+      "fill_color": "#6a7280",
+      "fill_energy": 0.2,
+      "fill_rotation_deg": [-18.0, 138.0, 0.0],
+      "sky_color": "#3f4742",
+      "fog_color": "#595f59",
+      "fog_density": 0.0053,
+      "volumetric_fog": true,
+      "volumetric_fog_density": 0.028
+    },
+    "village_dusk": {
+      "sun_color": "#efb46e",
+      "sun_energy": 1.25,
+      "sun_rotation_deg": [-33.0, -39.0, 0.0],
+      "fill_color": "#8093ad",
+      "fill_energy": 0.3,
+      "fill_rotation_deg": [-18.0, 126.0, 0.0],
+      "sky_color": "#4e5f4a",
+      "fog_color": "#778061",
+      "fog_density": 0.004,
+      "volumetric_fog": true,
+      "volumetric_fog_density": 0.018
+    },
+    "camp_dusk": {
+      "sun_color": "#e6aa63",
+      "sun_energy": 1.18,
+      "sun_rotation_deg": [-35.0, -45.0, 0.0],
+      "fill_color": "#6c8196",
+      "fill_energy": 0.24,
+      "fill_rotation_deg": [-22.0, 132.0, 0.0],
+      "sky_color": "#404b3b",
+      "fog_color": "#606a50",
+      "fog_density": 0.0048,
+      "volumetric_fog": true,
+      "volumetric_fog_density": 0.024
+    },
+    "clinic_dusk": {
+      "sun_color": "#f0b57a",
+      "sun_energy": 1.22,
+      "sun_rotation_deg": [-32.0, -41.0, 0.0],
+      "fill_color": "#8a96a3",
+      "fill_energy": 0.29,
+      "fill_rotation_deg": [-18.0, 123.0, 0.0],
+      "sky_color": "#4c5a4b",
+      "fog_color": "#717b63",
+      "fog_density": 0.0042,
+      "volumetric_fog": true,
+      "volumetric_fog_density": 0.02
+    },
+    "river_dusk": {
+      "sun_color": "#e5aa73",
+      "sun_energy": 1.14,
+      "sun_rotation_deg": [-30.0, -44.0, 0.0],
+      "fill_color": "#6f8b98",
+      "fill_energy": 0.27,
+      "fill_rotation_deg": [-20.0, 130.0, 0.0],
+      "sky_color": "#445855",
+      "fog_color": "#607b77",
+      "fog_density": 0.0049,
+      "volumetric_fog": true,
+      "volumetric_fog_density": 0.023
+    },
+    "hamlet_dusk": {
+      "sun_color": "#ecb074",
+      "sun_energy": 1.2,
+      "sun_rotation_deg": [-31.0, -40.0, 0.0],
+      "fill_color": "#8191a0",
+      "fill_energy": 0.28,
+      "fill_rotation_deg": [-18.0, 124.0, 0.0],
+      "sky_color": "#4a5749",
+      "fog_color": "#6d7a66",
+      "fog_density": 0.0043,
+      "volumetric_fog": true,
+      "volumetric_fog_density": 0.019
+    },
+    "outpost_dusk": {
+      "sun_color": "#e2a164",
+      "sun_energy": 1.1,
+      "sun_rotation_deg": [-34.0, -48.0, 0.0],
+      "fill_color": "#748596",
+      "fill_energy": 0.25,
+      "fill_rotation_deg": [-22.0, 136.0, 0.0],
+      "sky_color": "#424f43",
+      "fog_color": "#5f6f5d",
+      "fog_density": 0.0047,
+      "volumetric_fog": true,
+      "volumetric_fog_density": 0.022
+    }
+  }
+}

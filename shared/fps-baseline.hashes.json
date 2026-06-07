@@ -1,0 +1,24 @@
+{
+  "schema_version": 1,
+  "generated_at": "2026-03-01T12:08:02.600Z",
+  "description": "FPS runtime baseline hashes. CRPG changes must not modify these files without explicit FPS maintenance work.",
+  "files": {
+    "css/style.css": "2f8617b7b9fc6cf92506c3f83cb345964ebceefd2183f40eaf32f66bac07b5cc",
+    "index.html": "87912a612f45e41c0e803f4f4ef5176fe9bec654e96a69dd6d5fa539dc80c62d",
+    "js/assets.js": "60d51a970b211177b12a41a588a68cb9bab655abbbf7292c16d9fe384b70df1d",
+    "js/audio.js": "2d50378f166e1a03f24d6c51fa485eb65528f37756243156ee977dcc92fa5ffc",
+    "js/config.js": "02def90ab87732c641a9da1900aed852fbd2cefdaa4718da82d85d5f710b9515",
+    "js/enemies.js": "add93fe010b41148a0cbce3a7ff8358673d88cef8c3956c524276fd9770c0187",
+    "js/game.js": "be00420b3897569d0f8b3340a0f2d879453026ca68890452aaf77666532d2f40",
+    "js/graphics.js": "06caf779974dfb46c2635e197603273f2e7bcda17f30ccf2fde938d95528b0ab",
+    "js/hud.js": "a89503e62645d2379d7c55d3a7043d8cec165a869cf0a2dcd93f6eed5c53a8a1",
+    "js/humanoid.js": "7689dd63ee807c33265a7c7c879a51a1a448ab7fd62b595d0e8a741c7b7a1626",
+    "js/npcs.js": "9cbcc6c36095480f452a1a1508820a2858c981dc0c0bd8322b6879ad53a9e3b9",
+    "js/player.js": "b87a7255765ca7f582d8081ce52d409f6179797c678c2f8aa3339f091e8e5320",
+    "js/rpg.js": "9ef6ee1398cb6ba9bcc92a5d2002ebd2ff7cb11e266187cb938478edb909d6ab",
+    "js/world.js": "d89b1ff11a67ec69ac22f52d0686c16bea45b068891fb04f6dda7a735bbd9b51",
+    "package.json": "47f8c6e0c7ea669bb579c5e44681b42f1ff0986ebc7fe546a97b0d47e7614f63",
+    "start.sh": "55bc8150dd64d24b71e5b2535f77ecd3e845e89a1e50e6862c6880c79d77f135",
+    "vite.config.js": "c99518624bb62e727390ebeb175e47095e779e3446a31c08f380edd00c17d4e9"
+  }
+}

@@ -1,0 +1,55 @@
+{
+  "zone": "village",
+  "version": 1,
+  "basePath": "assets/optimized/village/",
+  "anchors": [
+    {
+      "id": "hero-market",
+      "transform": {
+        "x": -6,
+        "y": 0,
+        "z": 34,
+        "rotationY": 0,
+        "scale": 3.4
+      },
+      "variants": {
+        "low": {
+          "url": "hero-market-low.gltf",
+          "scale": 2.8
+        },
+        "medium": {
+          "url": "hero-market.gltf",
+          "scale": 3.4
+        },
+        "high": {
+          "url": "hero-market-high.gltf",
+          "scale": 4.2
+        }
+      }
+    },
+    {
+      "id": "prop-cluster",
+      "transform": {
+        "x": 8,
+        "y": 0,
+        "z": 24,
+        "rotationY": 0.6,
+        "scale": 2.7
+      },
+      "variants": {
+        "low": {
+          "url": "prop-cluster-low.gltf",
+          "scale": 2.1
+        },
+        "medium": {
+          "url": "prop-cluster.gltf",
+          "scale": 2.7
+        },
+        "high": {
+          "url": "prop-cluster-high.gltf",
+          "scale": 3.4
+        }
+      }
+    }
+  ]
+}

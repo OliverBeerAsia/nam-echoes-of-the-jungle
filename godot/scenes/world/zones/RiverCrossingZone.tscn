@@ -1,0 +1,16 @@
+[gd_scene load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/world/river_crossing_zone.gd" id="1"]
+
+[node name="RiverCrossingZone" type="Node3D"]
+script = ExtResource("1")
+
+[node name="Terrain" type="Node3D" parent="."]
+
+[node name="Foliage" type="Node3D" parent="."]
+
+[node name="Kit" type="Node3D" parent="."]
+
+[node name="NPCs" type="Node3D" parent="."]
+
+[node name="Atmosphere" type="Node3D" parent="."]

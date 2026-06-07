@@ -1,0 +1,36 @@
+{
+  "name": "nam-echoes-of-the-jungle",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build && node tools/copy-static-assets.mjs",
+    "preview": "vite preview",
+    "check:js": "node --check js/config.js && node --check js/rpg.js && node --check js/npcs.js && node --check js/world.js && node --check js/game.js && node --check js/hud.js && node --check js/player.js && node --check js/graphics.js && node --check js/assets.js",
+    "optimize:assets": "node tools/optimize-assets.mjs",
+    "validate:assets": "node tools/validate-asset-manifest.mjs",
+    "validate:assets:dist": "node tools/validate-asset-manifest.mjs --check-dist",
+    "validate:assets:strict": "node tools/validate-asset-manifest.mjs --check-dist --strict-runtime-urls",
+    "validate:acceptance": "node tools/validate-acceptance-report.mjs",
+    "validate:acceptance:strict": "node tools/validate-acceptance-report.mjs --strict",
+    "shared:export-story": "node tools/export-shared-story-data.mjs",
+    "shared:validate-story": "node tools/validate-shared-story-data.mjs",
+    "check:boundaries": "node tools/check-runtime-boundaries.mjs",
+    "update:fps:baseline": "node tools/update-fps-baseline.mjs",
+    "check:fps:baseline": "node tools/check-fps-baseline.mjs",
+    "fps:check": "npm run check:js && npm run build && npm run validate:assets:dist && npm run check:fps:baseline && npm run check:boundaries",
+    "release:check": "npm run check:js && npm run build && npm run validate:assets:strict && npm run validate:acceptance:strict && npm run check:fps:baseline && npm run check:boundaries",
+    "crpg:run": "godot --path godot res://scenes/crpg/CrpgMain.tscn",
+    "crpg:check": "npm run shared:validate-story && npm run check:boundaries",
+    "crpg:package": "node tools/package-crpg-release.mjs"
+  },
+  "dependencies": {
+    "three": "^0.162.0"
+  },
+  "devDependencies": {
+    "@gltf-transform/cli": "^4.2.1",
+    "@gltf-transform/functions": "^4.2.1",
+    "vite": "^5.2.0"
+  }
+}

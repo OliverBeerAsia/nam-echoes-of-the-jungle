@@ -1,0 +1,120 @@
+{
+  "profiles": {
+    "crash_smoke_frontier_v1": {
+      "mist_layers": [
+        { "position": [-18.0, 1.2, 85.0], "scale": [6.0, 2.2, 6.0], "color": "#2f3432", "alpha": 0.34 },
+        { "position": [-24.0, 1.0, 90.0], "scale": [4.4, 1.6, 4.4], "color": "#3c3d39", "alpha": 0.26 }
+      ],
+      "practical_lights": [
+        { "kind": "omni", "position": [-18.4, 1.2, 84.8], "color": "#ff7b3b", "energy": 0.9, "range": 8.5 },
+        { "kind": "omni", "position": [-15.7, 1.1, 87.5], "color": "#ff6a34", "energy": 0.7, "range": 6.2 }
+      ],
+      "beacon_markers": [
+        { "position": [-16.0, 0.3, 82.0], "color": "#57c874", "emission": 1.15, "scale": [0.35, 0.12, 0.35] }
+      ],
+      "ambient_emitters": [
+        { "id": "crash_fire_bed", "position": [-18.0, 0.3, 85.0], "radius": 14.0, "intensity": 0.9 },
+        { "id": "distant_rotor_creak", "position": [-23.0, 1.2, 90.0], "radius": 18.0, "intensity": 0.6 }
+      ]
+    },
+    "village_evening_market_v1": {
+      "mist_layers": [
+        { "position": [0.0, 1.0, 25.0], "scale": [10.0, 1.4, 10.0], "color": "#4a5a47", "alpha": 0.16 }
+      ],
+      "practical_lights": [
+        { "kind": "omni", "position": [-5.6, 2.1, 35.4], "color": "#ffd59a", "energy": 0.85, "range": 7.0 },
+        { "kind": "omni", "position": [6.4, 2.0, 27.2], "color": "#ffd090", "energy": 0.7, "range": 6.2 }
+      ],
+      "beacon_markers": [
+        { "position": [-2.0, 0.35, 19.0], "color": "#8bdcab", "emission": 0.9, "scale": [0.22, 0.09, 0.22] }
+      ],
+      "ambient_emitters": [
+        { "id": "village_cicadas", "position": [3.0, 1.2, 24.0], "radius": 26.0, "intensity": 0.65 },
+        { "id": "market_chatter", "position": [-6.0, 1.4, 33.0], "radius": 22.0, "intensity": 0.52 }
+      ]
+    },
+    "camp_hostile_perimeter_v1": {
+      "mist_layers": [
+        { "position": [-52.0, 1.2, -38.0], "scale": [8.4, 2.0, 8.4], "color": "#3b4336", "alpha": 0.2 }
+      ],
+      "practical_lights": [
+        { "kind": "spot", "position": [-67.8, 7.9, -26.0], "rotation_deg": [-52.0, 22.0, 0.0], "color": "#c8d5df", "energy": 0.95, "range": 21.0, "angle": 32.0 },
+        { "kind": "omni", "position": [-45.8, 2.2, -39.2], "color": "#ff7a42", "energy": 0.75, "range": 9.0 }
+      ],
+      "beacon_markers": [
+        { "position": [-40.0, 0.3, -32.0], "color": "#dd6760", "emission": 0.75, "scale": [0.22, 0.08, 0.22] }
+      ],
+      "ambient_emitters": [
+        { "id": "radio_static", "position": [-44.0, 4.0, -44.0], "radius": 20.0, "intensity": 0.7 },
+        { "id": "guard_footsteps", "position": [-58.0, 1.0, -30.0], "radius": 16.0, "intensity": 0.58 }
+      ]
+    },
+    "clinic_refuge_glow_v1": {
+      "mist_layers": [
+        { "position": [58.0, 0.9, 18.0], "scale": [5.5, 1.5, 5.5], "color": "#4f5a4f", "alpha": 0.16 }
+      ],
+      "practical_lights": [
+        { "kind": "omni", "position": [63.1, 2.3, 18.0], "color": "#ffe2b5", "energy": 0.76, "range": 6.8 },
+        { "kind": "omni", "position": [60.8, 2.1, 14.4], "color": "#ffdca8", "energy": 0.68, "range": 5.8 },
+        { "kind": "omni", "position": [64.2, 2.35, 18.0], "color": "#d84d43", "energy": 0.58, "range": 4.5 }
+      ],
+      "beacon_markers": [
+        { "position": [56.0, 0.35, 20.0], "color": "#8ad2a1", "emission": 0.82, "scale": [0.2, 0.08, 0.2] }
+      ],
+      "ambient_emitters": [
+        { "id": "clinic_prayer", "position": [56.0, 1.4, 20.0], "radius": 14.0, "intensity": 0.45 },
+        { "id": "medical_supplies", "position": [61.0, 1.2, 19.0], "radius": 10.0, "intensity": 0.4 }
+      ]
+    },
+    "river_crossing_mist_v1": {
+      "mist_layers": [
+        { "position": [83.0, 1.1, -6.0], "scale": [10.2, 1.8, 8.5], "color": "#41605d", "alpha": 0.25 },
+        { "position": [90.0, 1.0, -3.0], "scale": [6.6, 1.3, 5.6], "color": "#4e7068", "alpha": 0.16 }
+      ],
+      "practical_lights": [
+        { "kind": "omni", "position": [78.3, 2.7, -2.0], "color": "#ffd69a", "energy": 0.72, "range": 6.2 },
+        { "kind": "omni", "position": [86.2, 2.7, -1.0], "color": "#ffd69a", "energy": 0.72, "range": 6.2 }
+      ],
+      "beacon_markers": [
+        { "position": [82.0, 0.3, -2.0], "color": "#9ecdb5", "emission": 0.78, "scale": [0.22, 0.08, 0.22] }
+      ],
+      "ambient_emitters": [
+        { "id": "river_current", "position": [86.0, 0.8, -6.0], "radius": 24.0, "intensity": 0.78 },
+        { "id": "ferry_rope", "position": [86.0, 1.2, -10.0], "radius": 11.0, "intensity": 0.42 }
+      ]
+    },
+    "hamlet_lantern_calm_v1": {
+      "mist_layers": [
+        { "position": [95.0, 1.0, 18.0], "scale": [8.0, 1.2, 8.0], "color": "#495a4c", "alpha": 0.14 }
+      ],
+      "practical_lights": [
+        { "kind": "omni", "position": [92.0, 1.9, 22.0], "color": "#ffd7a2", "energy": 0.72, "range": 5.6 },
+        { "kind": "omni", "position": [98.5, 2.0, 13.8], "color": "#ffd7a2", "energy": 0.72, "range": 5.6 }
+      ],
+      "beacon_markers": [
+        { "position": [97.0, 0.32, 15.0], "color": "#8bc89f", "emission": 0.75, "scale": [0.2, 0.08, 0.2] }
+      ],
+      "ambient_emitters": [
+        { "id": "river_hamlet_chatter", "position": [95.0, 1.1, 18.0], "radius": 18.0, "intensity": 0.5 },
+        { "id": "cooking_fire", "position": [94.0, 0.8, 18.0], "radius": 12.0, "intensity": 0.56 }
+      ]
+    },
+    "outpost_security_grid_v1": {
+      "mist_layers": [
+        { "position": [96.0, 1.3, -72.0], "scale": [9.0, 1.5, 7.0], "color": "#44534b", "alpha": 0.17 }
+      ],
+      "practical_lights": [
+        { "kind": "spot", "position": [106.0, 6.2, -67.0], "rotation_deg": [-38.0, -18.0, 0.0], "color": "#cbd8ef", "energy": 0.92, "range": 24.0, "angle": 36.0 },
+        { "kind": "omni", "position": [94.8, 4.0, -66.0], "color": "#d2e0ff", "energy": 0.68, "range": 12.0 },
+        { "kind": "omni", "position": [100.3, 4.2, -79.0], "color": "#d2e0ff", "energy": 0.68, "range": 12.0 }
+      ],
+      "beacon_markers": [
+        { "position": [94.0, 0.35, -70.0], "color": "#7bb6d2", "emission": 0.7, "scale": [0.22, 0.08, 0.22] }
+      ],
+      "ambient_emitters": [
+        { "id": "checkpoint_orders", "position": [96.0, 1.4, -67.0], "radius": 18.0, "intensity": 0.6 },
+        { "id": "comms_static", "position": [89.0, 2.2, -75.0], "radius": 12.0, "intensity": 0.72 }
+      ]
+    }
+  }
+}

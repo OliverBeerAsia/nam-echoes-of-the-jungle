@@ -1,0 +1,45 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://nam-echoes.local/schemas/savegame.schema.json",
+  "title": "NAM CRPG Save Contract",
+  "type": "object",
+  "required": ["player_state", "party_state", "quest_state", "world_flags", "meta"],
+  "additionalProperties": false,
+  "properties": {
+    "player_state": {
+      "type": "object",
+      "required": ["position"],
+      "properties": {
+        "position": {
+          "type": "array",
+          "items": { "type": "number" },
+          "minItems": 3,
+          "maxItems": 3
+        }
+      }
+    },
+    "party_state": {
+      "type": "object",
+      "required": ["rodriguez", "cpl_whitaker", "spc_hale"],
+      "properties": {
+        "rodriguez": { "type": "boolean" },
+        "cpl_whitaker": { "type": "boolean" },
+        "spc_hale": { "type": "boolean" }
+      }
+    },
+    "quest_state": {
+      "type": "object"
+    },
+    "world_flags": {
+      "type": "object"
+    },
+    "meta": {
+      "type": "object",
+      "required": ["civilian_trust", "nonviolent_resolutions"],
+      "properties": {
+        "civilian_trust": { "type": "integer" },
+        "nonviolent_resolutions": { "type": "integer" }
+      }
+    }
+  }
+}

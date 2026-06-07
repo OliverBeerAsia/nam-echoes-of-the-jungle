@@ -1,0 +1,293 @@
+{
+  "zone_id": "hamlet",
+  "terrain_material_set": "terrain_hamlet_dry_soil_v1",
+  "foliage_profile_id": "hamlet_edge_jungle_v1",
+  "light_rig_id": "hamlet_dusk",
+  "ambience_profile_id": "hamlet_evening",
+  "prop_groups": [
+    {
+      "group_id": "hamlet_housing",
+      "asset_set": "hamlet_hut_set",
+      "anchors": [
+        {
+          "asset_id": "hamlet_hut_01",
+          "position": [
+            91,
+            0,
+            16
+          ],
+          "rotation_y": 10,
+          "scale": [
+            1,
+            1,
+            1
+          ],
+          "proxy_size": [
+            3.6,
+            2.6,
+            3.0
+          ]
+        },
+        {
+          "asset_id": "hamlet_hut_02",
+          "position": [
+            95,
+            0,
+            20
+          ],
+          "rotation_y": -5,
+          "scale": [
+            1,
+            1,
+            1
+          ],
+          "proxy_size": [
+            3.6,
+            2.6,
+            3.0
+          ]
+        },
+        {
+          "asset_id": "hamlet_hut_03",
+          "position": [
+            99,
+            0,
+            16
+          ],
+          "rotation_y": 0,
+          "scale": [
+            1,
+            1,
+            1
+          ],
+          "proxy_size": [
+            3.6,
+            2.6,
+            3.0
+          ]
+        },
+        {
+          "asset_id": "hamlet_hut_04",
+          "position": [
+            93,
+            0,
+            24
+          ],
+          "rotation_y": 18,
+          "scale": [
+            1,
+            1,
+            1
+          ],
+          "proxy_size": [
+            3.4,
+            2.5,
+            2.8
+          ]
+        },
+        {
+          "asset_id": "hamlet_hut_05",
+          "position": [
+            101,
+            0,
+            22
+          ],
+          "rotation_y": -18,
+          "scale": [
+            1,
+            1,
+            1
+          ],
+          "proxy_size": [
+            3.8,
+            2.7,
+            3.1
+          ]
+        }
+      ]
+    },
+    {
+      "group_id": "hamlet_lane_props",
+      "asset_set": "hamlet_domestic_clutter_set",
+      "anchors": [
+        {
+          "asset_id": "hamlet_market_canopy",
+          "position": [
+            96,
+            0,
+            14
+          ],
+          "rotation_y": 6,
+          "scale": [
+            1,
+            1,
+            1
+          ],
+          "proxy_size": [
+            4.2,
+            2.2,
+            2.4
+          ]
+        },
+        {
+          "asset_id": "hamlet_fishing_rack",
+          "position": [
+            103,
+            0,
+            18
+          ],
+          "rotation_y": 90,
+          "scale": [
+            1,
+            1,
+            1
+          ],
+          "proxy_size": [
+            2.8,
+            1.8,
+            1.4
+          ]
+        },
+        {
+          "asset_id": "hamlet_supply_cart",
+          "position": [
+            89,
+            0,
+            21
+          ],
+          "rotation_y": -22,
+          "scale": [
+            1,
+            1,
+            1
+          ],
+          "proxy_size": [
+            2.5,
+            1.5,
+            1.5
+          ]
+        },
+        {
+          "asset_id": "hamlet_cooking_fire_01",
+          "position": [
+            94,
+            0,
+            18
+          ],
+          "rotation_y": 0,
+          "scale": [
+            1,
+            1,
+            1
+          ],
+          "proxy_size": [
+            1.2,
+            1.0,
+            1.2
+          ]
+        },
+        {
+          "asset_id": "hamlet_water_jars",
+          "position": [
+            100,
+            0,
+            19
+          ],
+          "rotation_y": 0,
+          "scale": [
+            1,
+            1,
+            1
+          ],
+          "proxy_size": [
+            1.8,
+            1.4,
+            1.6
+          ]
+        }
+      ]
+    }
+  ],
+  "npc_spawns": [
+    {
+      "name": "Mai",
+      "profile_id": "mai",
+      "state": "idle_talk",
+      "position": [
+        97,
+        0,
+        15
+      ],
+      "rotation_y": 142
+    },
+    {
+      "name": "Spc. Hale",
+      "profile_id": "spc_hale",
+      "state": "alert",
+      "position": [
+        103,
+        0,
+        23
+      ],
+      "rotation_y": -124
+    },
+    {
+      "name": "Binh",
+      "profile_id": "binh",
+      "state": "seated_rest",
+      "position": [
+        92,
+        0,
+        19
+      ],
+      "rotation_y": 35
+    }
+  ],
+  "atmosphere_profile_id": "hamlet_lantern_calm_v1",
+  "quest_readability": {
+    "primary_route_hint": "Reconnect Hale and secure local guide route",
+    "landmarks": [
+      {
+        "id": "market_canopy",
+        "label": "Market Canopy",
+        "position": [
+          96.0,
+          0.12,
+          14.0
+        ],
+        "color": "#d8ba7a"
+      },
+      {
+        "id": "hale_hideout",
+        "label": "Hale Position",
+        "position": [
+          103.0,
+          0.12,
+          23.0
+        ],
+        "color": "#88c29e"
+      }
+    ],
+    "interactables": [
+      {
+        "id": "mai",
+        "position": [
+          97.0,
+          0.2,
+          15.0
+        ],
+        "prompt": "Speak with Mai"
+      },
+      {
+        "id": "hale",
+        "position": [
+          103.0,
+          0.2,
+          23.0
+        ],
+        "prompt": "Signal Hale"
+      }
+    ],
+    "sightline_budget_m": 45
+  }
+}

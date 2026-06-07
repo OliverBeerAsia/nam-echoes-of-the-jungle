@@ -1,0 +1,44 @@
+{
+  "default": "medium",
+  "presets": {
+    "low": {
+      "render_scale": 0.75,
+      "msaa_3d": 0,
+      "foliage_density": 0.55,
+      "shadow_quality": "low",
+      "volumetric_fog": false,
+      "lod_bias": 0.72,
+      "clutter_density": 0.55,
+      "max_dynamic_lights": 6,
+      "shadow_distance": 68.0,
+      "material_detail_scale": 0.78,
+      "post_fx_strength": 0.3
+    },
+    "medium": {
+      "render_scale": 1.0,
+      "msaa_3d": 1,
+      "foliage_density": 1.0,
+      "shadow_quality": "medium",
+      "volumetric_fog": true,
+      "lod_bias": 1.0,
+      "clutter_density": 1.0,
+      "max_dynamic_lights": 10,
+      "shadow_distance": 110.0,
+      "material_detail_scale": 1.0,
+      "post_fx_strength": 0.6
+    },
+    "high": {
+      "render_scale": 1.08,
+      "msaa_3d": 1,
+      "foliage_density": 1.22,
+      "shadow_quality": "high",
+      "volumetric_fog": true,
+      "lod_bias": 1.16,
+      "clutter_density": 1.2,
+      "max_dynamic_lights": 12,
+      "shadow_distance": 150.0,
+      "material_detail_scale": 1.14,
+      "post_fx_strength": 0.85
+    }
+  }
+}

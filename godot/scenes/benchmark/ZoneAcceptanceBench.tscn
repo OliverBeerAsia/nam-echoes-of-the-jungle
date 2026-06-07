@@ -1,0 +1,30 @@
+[gd_scene load_steps=3 format=3]
+
+[ext_resource type="Script" path="res://scripts/benchmark/zone_acceptance_bench.gd" id="1"]
+
+[sub_resource type="Environment" id="1"]
+
+[node name="ZoneAcceptanceBench" type="Node3D"]
+script = ExtResource("1")
+
+[node name="ZoneRoot" type="Node3D" parent="."]
+
+[node name="Camera3D" type="Camera3D" parent="."]
+current = true
+fov = 72.0
+near = 0.05
+far = 1800.0
+
+[node name="Sun" type="DirectionalLight3D" parent="."]
+rotation = Vector3(-0.628319, -0.733038, 0)
+light_color = Color(0.960784, 0.729412, 0.454902, 1)
+light_energy = 1.35
+shadow_enabled = true
+
+[node name="FillLight" type="DirectionalLight3D" parent="."]
+rotation = Vector3(-0.349066, 2.23402, 0)
+light_color = Color(0.427451, 0.537255, 0.647059, 1)
+light_energy = 0.28
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("1")

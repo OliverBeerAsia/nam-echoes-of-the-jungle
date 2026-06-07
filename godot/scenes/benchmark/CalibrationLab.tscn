@@ -1,0 +1,26 @@
+[gd_scene load_steps=3 format=3]
+
+[ext_resource type="Script" path="res://scripts/world/calibration_lab.gd" id="1"]
+[ext_resource type="Script" path="res://scripts/player/player_debug_controller.gd" id="2"]
+
+[node name="CalibrationLab" type="Node3D"]
+script = ExtResource("1")
+
+[node name="PlayerRig" type="Node3D" parent="."]
+position = Vector3(0, 2, 8)
+script = ExtResource("2")
+
+[node name="Camera3D" type="Camera3D" parent="PlayerRig"]
+current = true
+fov = 70.0
+
+[node name="Sun" type="DirectionalLight3D" parent="."]
+rotation = Vector3(-0.645772, -0.785398, 0)
+light_color = Color(1, 0.937255, 0.776471, 1)
+light_energy = 1.2
+shadow_enabled = true
+
+[node name="Fill" type="DirectionalLight3D" parent="."]
+rotation = Vector3(-0.279253, 2.26893, 0)
+light_color = Color(0.584314, 0.690196, 0.772549, 1)
+light_energy = 0.25

@@ -1,0 +1,22 @@
+; Engine configuration file.
+; Auto-generated for NAM rebuild prototype.
+config_version=5
+
+[application]
+config/name="NAM: Echoes of the Jungle Rebuild"
+run/main_scene="res://scenes/Main.tscn"
+config/features=PackedStringArray("4.2", "Forward Plus")
+
+[autoload]
+GraphicsSettings="*res://scripts/core/graphics_settings.gd"
+DataStore="*res://scripts/core/data_store.gd"
+
+[display]
+window/size/viewport_width=1920
+window/size/viewport_height=1080
+window/stretch/mode="viewport"
+window/stretch/aspect="expand"
+
+[rendering]
+renderer/rendering_method="forward_plus"
+environment/defaults/default_clear_color=Color(0.086275, 0.109804, 0.0784314, 1)

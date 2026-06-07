@@ -1,0 +1,106 @@
+{
+  "profiles": {
+    "elder_nguyen": {
+      "rig_id": "humanoid_male_elder_a",
+      "material_variant_id": "skin_tan_weathered_v2",
+      "animation_state_machine_id": "npc_dialogue_grounded_v1",
+      "facial_profile_id": "elder_nguyen_face_v1"
+    },
+    "thanh": {
+      "rig_id": "humanoid_female_adult_a",
+      "material_variant_id": "skin_tan_soft_v1",
+      "animation_state_machine_id": "npc_dialogue_alert_v1",
+      "facial_profile_id": "thanh_face_v1"
+    },
+    "rodriguez": {
+      "rig_id": "humanoid_male_soldier_a",
+      "material_variant_id": "us_uniform_field_dirty_v2",
+      "animation_state_machine_id": "npc_rescue_injured_v1",
+      "facial_profile_id": "rodriguez_face_v1"
+    },
+    "sister_lan": {
+      "rig_id": "humanoid_female_medic_a",
+      "material_variant_id": "medic_cloth_clean_worn_v1",
+      "animation_state_machine_id": "npc_dialogue_grounded_v1",
+      "facial_profile_id": "sister_lan_face_v1"
+    },
+    "cpl_whitaker": {
+      "rig_id": "humanoid_male_soldier_medic_a",
+      "material_variant_id": "us_uniform_field_bloodied_v1",
+      "animation_state_machine_id": "npc_rescue_injured_v1",
+      "facial_profile_id": "cpl_whitaker_face_v1"
+    },
+    "sgt_kiet": {
+      "rig_id": "humanoid_male_soldier_b",
+      "material_variant_id": "arvn_uniform_field_v1",
+      "animation_state_machine_id": "npc_guard_checkpoint_v1",
+      "facial_profile_id": "sgt_kiet_face_v1"
+    },
+    "ferryman_huy": {
+      "rig_id": "humanoid_male_adult_a",
+      "material_variant_id": "civilian_fisher_worn_v1",
+      "animation_state_machine_id": "npc_dialogue_grounded_v1",
+      "facial_profile_id": "ferryman_huy_face_v1"
+    },
+    "duc": {
+      "rig_id": "humanoid_male_adult_b",
+      "material_variant_id": "civilian_farmer_weathered_v1",
+      "animation_state_machine_id": "npc_dialogue_alert_v1",
+      "facial_profile_id": "duc_face_v1"
+    },
+    "binh": {
+      "rig_id": "humanoid_male_teen_a",
+      "material_variant_id": "civilian_teen_cloth_v1",
+      "animation_state_machine_id": "npc_dialogue_grounded_v1",
+      "facial_profile_id": "binh_face_v1"
+    },
+    "mai": {
+      "rig_id": "humanoid_female_adult_b",
+      "material_variant_id": "civilian_cloth_layered_v1",
+      "animation_state_machine_id": "npc_dialogue_grounded_v1",
+      "facial_profile_id": "mai_face_v1"
+    },
+    "spc_hale": {
+      "rig_id": "humanoid_male_soldier_c",
+      "material_variant_id": "us_uniform_field_worn_v1",
+      "animation_state_machine_id": "npc_dialogue_alert_v1",
+      "facial_profile_id": "spc_hale_face_v1"
+    },
+    "lt_pham": {
+      "rig_id": "humanoid_male_officer_a",
+      "material_variant_id": "arvn_officer_uniform_v1",
+      "animation_state_machine_id": "npc_briefing_talk_v1",
+      "facial_profile_id": "lt_pham_face_v1"
+    },
+    "father_bao": {
+      "rig_id": "humanoid_male_elder_b",
+      "material_variant_id": "civilian_clergy_worn_v1",
+      "animation_state_machine_id": "npc_dialogue_grounded_v1",
+      "facial_profile_id": "father_bao_face_v1"
+    },
+    "wounded_civilian": {
+      "rig_id": "humanoid_male_adult_c",
+      "material_variant_id": "civilian_cloth_bloodied_v1",
+      "animation_state_machine_id": "npc_rescue_injured_crouch_v1",
+      "facial_profile_id": "wounded_civilian_face_v1"
+    },
+    "camp_guard": {
+      "rig_id": "humanoid_male_soldier_d",
+      "material_variant_id": "uniform_vc_guard_worn_v1",
+      "animation_state_machine_id": "npc_guard_checkpoint_v1",
+      "facial_profile_id": "camp_guard_face_v1"
+    },
+    "volunteer_an": {
+      "rig_id": "humanoid_female_adult_c",
+      "material_variant_id": "civilian_medic_helper_v1",
+      "animation_state_machine_id": "npc_briefing_talk_v1",
+      "facial_profile_id": "volunteer_an_face_v1"
+    },
+    "arvn_sentry": {
+      "rig_id": "humanoid_male_soldier_e",
+      "material_variant_id": "arvn_uniform_field_v2",
+      "animation_state_machine_id": "npc_guard_checkpoint_v1",
+      "facial_profile_id": "arvn_sentry_face_v1"
+    }
+  }
+}

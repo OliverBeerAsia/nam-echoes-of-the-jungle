@@ -1,0 +1,173 @@
+{
+  "zone_id": "clinic",
+  "terrain_material_set": "terrain_clinic_wet_soil_v1",
+  "foliage_profile_id": "jungle_sparse_mission_ruins_v1",
+  "light_rig_id": "clinic_dusk",
+  "ambience_profile_id": "clinic_ruins_bed",
+  "prop_groups": [
+    {
+      "group_id": "clinic_core",
+      "asset_set": "clinic_shell_set_a",
+      "anchors": [
+        {
+          "asset_id": "clinic_main_building",
+          "position": [
+            58,
+            0,
+            18
+          ],
+          "rotation_y": 0,
+          "scale": [
+            1,
+            1,
+            1
+          ],
+          "proxy_size": [
+            12.0,
+            3.6,
+            8.0
+          ]
+        },
+        {
+          "asset_id": "clinic_cache_box",
+          "position": [
+            62,
+            0,
+            14
+          ],
+          "rotation_y": 0,
+          "scale": [
+            1,
+            1,
+            1
+          ],
+          "proxy_size": [
+            1.4,
+            1.0,
+            1.4
+          ]
+        },
+        {
+          "asset_id": "clinic_ambulance_wreck",
+          "position": [
+            54,
+            0,
+            20
+          ],
+          "rotation_y": -35,
+          "scale": [
+            1,
+            1,
+            1
+          ],
+          "proxy_size": [
+            3.8,
+            1.5,
+            2.2
+          ]
+        },
+        {
+          "asset_id": "clinic_triage_tent",
+          "position": [
+            63,
+            0,
+            22
+          ],
+          "rotation_y": 18,
+          "scale": [
+            1,
+            1,
+            1
+          ],
+          "proxy_size": [
+            4.0,
+            2.3,
+            2.8
+          ]
+        }
+      ]
+    }
+  ],
+  "npc_spawns": [
+    {
+      "name": "Sister Lan",
+      "profile_id": "sister_lan",
+      "state": "idle_talk",
+      "position": [
+        56,
+        0,
+        20
+      ],
+      "rotation_y": 28
+    },
+    {
+      "name": "Cpl. Whitaker",
+      "profile_id": "cpl_whitaker",
+      "state": "injured",
+      "position": [
+        58,
+        0,
+        16
+      ],
+      "rotation_y": 165
+    },
+    {
+      "name": "Volunteer An",
+      "profile_id": "volunteer_an",
+      "state": "briefing_talk",
+      "position": [
+        61,
+        0,
+        19
+      ],
+      "rotation_y": -118
+    }
+  ],
+  "atmosphere_profile_id": "clinic_refuge_glow_v1",
+  "quest_readability": {
+    "primary_route_hint": "Stabilize Whitaker and gather evacuation intel",
+    "landmarks": [
+      {
+        "id": "clinic_main",
+        "label": "Clinic Main",
+        "position": [
+          58.0,
+          0.12,
+          18.0
+        ],
+        "color": "#9ac4b0"
+      },
+      {
+        "id": "triage_tent",
+        "label": "Triage Tent",
+        "position": [
+          63.0,
+          0.12,
+          22.0
+        ],
+        "color": "#dfb47c"
+      }
+    ],
+    "interactables": [
+      {
+        "id": "whitaker",
+        "position": [
+          58.0,
+          0.2,
+          16.0
+        ],
+        "prompt": "Check Whitaker"
+      },
+      {
+        "id": "medical_supplies",
+        "position": [
+          62.0,
+          0.2,
+          14.0
+        ],
+        "prompt": "Collect med supplies"
+      }
+    ],
+    "sightline_budget_m": 40
+  }
+}

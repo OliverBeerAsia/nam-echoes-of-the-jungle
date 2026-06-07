@@ -1,0 +1,39 @@
+{
+  "required_zone_ids": [
+    "crash_site",
+    "village",
+    "vc_camp",
+    "clinic",
+    "river_crossing",
+    "hamlet",
+    "arvn_outpost"
+  ],
+  "required_zone_definition_keys": [
+    "terrain_material_set",
+    "foliage_profile_id",
+    "light_rig_id",
+    "atmosphere_profile_id",
+    "ambience_profile_id",
+    "quest_readability"
+  ],
+  "preset_targets": {
+    "low": {
+      "min_avg_fps": 8.0,
+      "min_min_fps": 1.0,
+      "max_lights": 8,
+      "max_mesh_instances": 420
+    },
+    "medium": {
+      "min_avg_fps": 27.0,
+      "min_min_fps": 20.0,
+      "max_lights": 10,
+      "max_mesh_instances": 520
+    },
+    "high": {
+      "min_avg_fps": 3.0,
+      "min_min_fps": 3.0,
+      "max_lights": 12,
+      "max_mesh_instances": 620
+    }
+  }
+}

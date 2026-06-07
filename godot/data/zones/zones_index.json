@@ -1,0 +1,46 @@
+{
+  "zones": [
+    {
+      "id": "crash_site",
+      "center": [-18, 0, 85],
+      "definition": "res://data/zones/crash_site/zone_definition.json",
+      "scene": "res://scenes/world/zones/CrashSiteZone.tscn"
+    },
+    {
+      "id": "village",
+      "center": [0, 0, 20],
+      "definition": "res://data/zones/village/zone_definition.json",
+      "scene": "res://scenes/world/zones/VillageZone.tscn"
+    },
+    {
+      "id": "vc_camp",
+      "center": [-52, 0, -42],
+      "definition": "res://data/zones/vc_camp/zone_definition.json",
+      "scene": "res://scenes/world/zones/VCCampZone.tscn"
+    },
+    {
+      "id": "clinic",
+      "center": [58, 0, 18],
+      "definition": "res://data/zones/clinic/zone_definition.json",
+      "scene": "res://scenes/world/zones/ClinicZone.tscn"
+    },
+    {
+      "id": "river_crossing",
+      "center": [83, 0, -6],
+      "definition": "res://data/zones/river_crossing/zone_definition.json",
+      "scene": "res://scenes/world/zones/RiverCrossingZone.tscn"
+    },
+    {
+      "id": "hamlet",
+      "center": [95, 0, 18],
+      "definition": "res://data/zones/hamlet/zone_definition.json",
+      "scene": "res://scenes/world/zones/HamletZone.tscn"
+    },
+    {
+      "id": "arvn_outpost",
+      "center": [96, 0, -72],
+      "definition": "res://data/zones/arvn_outpost/zone_definition.json",
+      "scene": "res://scenes/world/zones/ARVNOutpostZone.tscn"
+    }
+  ]
+}
