@@ -1,6 +1,6 @@
 # Release Notes
 
-## v0.1.0-staging
+## v0.1.1-staging
 
 Date: 2026-06-07
 
@@ -17,6 +17,10 @@ This release publishes the browser prototype of `NAM: Echoes of the Jungle` to G
 - The browser build no longer depends on Google Fonts or CDN-hosted Three decoder paths. Rapier physics is opt-in; the default production build uses the legacy AABB collision fallback.
 - GitHub Pages deployment is handled by `.github/workflows/deploy-pages.yml`.
 - Vite is configured with the project Pages base path so deployed CSS and JS resolve under `/nam-echoes-of-the-jungle/`.
+- Browser graphics now target a late-90s tactical realism profile: smaller generated textures, lower foliage density, lower pixel ratio caps, no bloom/SSAO/SMAA/sky PMREM, and flat humid lighting.
+- Mission startup now shows a progress screen and builds the opening crash/village sector before streaming heavier remote mission zones after the first playable frame.
+- The title/menu now loads through a tiny boot chunk and imports the heavy Three.js game runtime only after `BEGIN MISSION`.
+- Low-profile foliage and atmosphere were fixed for clean WebGL shader compilation and soft, non-rectangular haze sprites.
 
 ### Validation
 

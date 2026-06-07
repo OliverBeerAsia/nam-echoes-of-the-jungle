@@ -6,9 +6,9 @@ You crash-land in rural southern Vietnam, search for surviving squadmates in dif
 
 ## Release Status
 
-Current release: `v0.1.0-staging`
+Current release: `v0.1.1-staging`
 
-This is a playable browser-game prototype and internal/staging release. It is not yet a final production benchmark: the Godot acceptance gate currently reports medium-preset FPS failures in `crash_site` and `clinic`, and headless Godot screenshot captures are not being recorded as release evidence.
+This is a playable browser-game prototype and internal/staging release. The browser build now favors a late-90s tactical realism profile: lower-resolution generated textures, simpler lighting, deferred zone streaming, and lower object density in exchange for faster first play and a more grounded field look. It is not yet a final production benchmark: the Godot acceptance gate currently reports medium-preset FPS failures in `crash_site` and `clinic`, and headless Godot screenshot captures are not being recorded as release evidence.
 
 Expected GitHub Pages URL after deployment:
 
@@ -145,3 +145,13 @@ On push to `main`, GitHub Actions will:
 5. publish `dist/` to GitHub Pages
 
 The workflow avoids the Godot strict acceptance gate so staging previews can be published while production-readiness blockers remain visible in release notes.
+
+## Browser Graphics Profile
+
+The browser runtime is tuned for reliable GitHub Pages play rather than showcase-grade rendering.
+
+- `AUTO` selects `LOW 1998` for most browsers and `FIELD` only on stronger low-DPR devices.
+- The title/menu ships as a tiny boot chunk; the full Three.js runtime is imported after `BEGIN MISSION`.
+- The opening crash site and village build first; remote mission zones stream after the first playable frame.
+- `LOW 1998` disables post-processing; higher profiles keep only a restrained color grade. Bloom, SSAO, SMAA, sky PMREM, and god rays are disabled.
+- Generated textures are intentionally small and filtered for a period-appropriate low-poly/low-res look.

@@ -1,13 +1,13 @@
 {
   "name": "nam-echoes-of-the-jungle",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "private": true,
   "type": "module",
   "scripts": {
     "dev": "vite",
     "build": "vite build && node tools/copy-static-assets.mjs",
     "preview": "vite preview",
-    "check:js": "node --check js/config.js && node --check js/rpg.js && node --check js/npcs.js && node --check js/world.js && node --check js/game.js && node --check js/hud.js && node --check js/player.js && node --check js/graphics.js && node --check js/assets.js",
+    "check:js": "node --check js/config.js && node --check js/rpg.js && node --check js/npcs.js && node --check js/world.js && node --check js/game.js && node --check js/boot.js && node --check js/hud.js && node --check js/player.js && node --check js/graphics.js && node --check js/vegetation.js && node --check js/assets.js",
     "optimize:assets": "node tools/optimize-assets.mjs",
     "validate:assets": "node tools/validate-asset-manifest.mjs",
     "validate:assets:dist": "node tools/validate-asset-manifest.mjs --check-dist",

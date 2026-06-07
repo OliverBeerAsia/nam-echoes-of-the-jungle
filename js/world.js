@@ -26,8 +26,6 @@ import { OpenWorldBuilder } from './openworld.js';
 import { RoadNetwork } from './roads.js';
 import {
   makeGroundAlbedo,
-  makeMudAlbedo,
-  makeNormalFromCanvas,
   makeNoiseNormal,
 } from './textures.js';
 
@@ -130,6 +128,28 @@ export class World {
     this._buildZoneAssetLayer();
   }
 
+  async buildProgressively({ onProgress = null, yieldFrame = null } = {}) {
+    const step = async (label, progress, fn) => {
+      onProgress?.(label, progress);
+      if (yieldFrame) await yieldFrame();
+      fn();
+      if (yieldFrame) await yieldFrame();
+    };
+
+    await step('Cutting terrain mesh...', 0.28, () => this._buildTerrain());
+    await step('Painting distant jungle line...', 0.36, () => this._buildDistantHorizon());
+    await step('Laying water and footpaths...', 0.46, () => {
+      this._buildWater();
+      this._buildPaths();
+    });
+    await step('Planting low-poly jungle...', 0.58, () => this._buildJungle());
+    await step('Building crash site and village...', 0.70, () => this._buildOpeningStructures());
+    await step('Adding dust and smoke...', 0.78, () => {
+      this._buildAtmosphere();
+      this._buildZoneAssetLayer();
+    });
+  }
+
   // Gaussian bump helper for authored heightmap regions
   _gaussianBump(x, z, cx, cz, amp, sigma) {
     const dx = x - cx;
@@ -160,7 +180,7 @@ export class World {
   // plateau, and far southwestern hills — plus low-amplitude trig-noise base.
   _buildTerrain() {
     const size = CONFIG.WORLD_SIZE;
-    const segs = 220; // bigger world needs slightly more resolution
+    const segs = this.quality.preset === 'low' ? 72 : 96;
     const geo = new THREE.PlaneGeometry(size * 1.5, size * 1.5, segs, segs);
     geo.rotateX(-Math.PI / 2);
 
@@ -172,52 +192,17 @@ export class World {
     }
     geo.computeVertexNormals();
 
-    // Procedural PBR ground textures
     const grassAlbedo = makeGroundAlbedo({
-      base: 0x556247, accent: 0x667456, speck: 0x758568,
+      base: 0x566147, accent: 0x66705a, speck: 0x37402f,
+      size: 192,
       key: 'world-grass-albedo',
     });
-    const mudAlbedo = makeMudAlbedo({
-      color: 0x6a563d,
-      key: 'world-mud-albedo',
-    });
 
-    // Bigger world needs more tiling
-    grassAlbedo.repeat.set(80, 80);
-    mudAlbedo.repeat.set(60, 60);
-
-    // Normal maps — derived from albedo for matching micro-detail
-    let grassNormal = null;
-    let mudNormal = null;
-    try {
-      grassNormal = makeNormalFromCanvas(grassAlbedo.image, {
-        strength: 0.85, key: 'world-grass-normal',
-      });
-      grassNormal.repeat.set(80, 80);
-    } catch (e) {
-      grassNormal = makeNoiseNormal({ scale: 6, strength: 0.7, key: 'world-grass-noise-normal' });
-      grassNormal.repeat.set(80, 80);
-    }
-    try {
-      mudNormal = makeNormalFromCanvas(mudAlbedo.image, {
-        strength: 1.0, key: 'world-mud-normal',
-      });
-      mudNormal.repeat.set(60, 60);
-    } catch (e) {
-      mudNormal = makeNoiseNormal({ scale: 5, strength: 0.9, key: 'world-mud-noise-normal' });
-      mudNormal.repeat.set(60, 60);
-    }
-
-    const mat = new THREE.MeshStandardMaterial({
+    grassAlbedo.repeat.set(52, 52);
+    const mat = new THREE.MeshLambertMaterial({
       map: grassAlbedo,
-      normalMap: grassNormal,
-      normalScale: new THREE.Vector2(0.9, 0.9),
-      roughness: 0.93,
-      metalness: 0.02,
       side: THREE.DoubleSide,
     });
-    mat.aoMapIntensity = 0.8;
-    this._applyTerrainBlendShader(mat, mudAlbedo, mudNormal);
 
     const terrain = new THREE.Mesh(geo, mat);
     terrain.castShadow = false;
@@ -301,7 +286,7 @@ ${shader.fragmentShader}
     const patchMat = new THREE.MeshStandardMaterial({ color: 0x3d5a2a, roughness: 0.96 });
     const dirtMat  = new THREE.MeshStandardMaterial({ color: 0x5a4020, roughness: 0.95 });
 
-    for (let i = 0; i < 60; i++) {
+    for (let i = 0; i < 28; i++) {
       const x = this._rand(-80, 80);
       const z = this._rand(-80, 80);
       const w = this._rand(3, 10);
@@ -310,7 +295,7 @@ ${shader.fragmentShader}
       geo.rotateX(-Math.PI / 2);
       const mat = this._rand() > 0.5 ? patchMat : dirtMat;
       const mesh = new THREE.Mesh(geo, mat);
-      mesh.position.set(x, 0.05, z);
+      mesh.position.set(x, this.getHeightAt(x, z) + 0.035, z);
       mesh.rotation.y = this._rand(0, Math.PI);
       mesh.receiveShadow = true;
       this.scene.add(mesh);
@@ -321,7 +306,7 @@ ${shader.fragmentShader}
   _buildDistantHorizon() {
     // Far-distance silhouette mountain ring at world edge
     const ringR = 540;
-    const mountainCount = 28;
+    const mountainCount = 16;
     const mountainGeo = new THREE.ConeGeometry(60, 90, 6);
     const mountainMat = new THREE.MeshBasicMaterial({
       color: 0x4a5d6a,  // desaturated grey-blue, hazy distance
@@ -340,7 +325,7 @@ ${shader.fragmentShader}
 
     // Closer-band darker hill silhouettes (between far-ring and near terrain)
     const innerRingR = 360;
-    const innerCount = 20;
+    const innerCount = 12;
     const hillGeo = new THREE.ConeGeometry(35, 50, 5);
     const hillMat = new THREE.MeshBasicMaterial({ color: 0x3d5042, fog: true });
     for (let i = 0; i < innerCount; i++) {
@@ -393,7 +378,7 @@ ${shader.fragmentShader}
     // far mountain silhouettes.
     const imposterGeo = new THREE.ConeGeometry(2.5, 7, 5);
     const imposterMat = new THREE.MeshBasicMaterial({ color: 0x2a4a1c, fog: true });
-    const imposterCount = 800;
+    const imposterCount = 180;
     const imposters = new THREE.InstancedMesh(imposterGeo, imposterMat, imposterCount);
     const _m = new THREE.Matrix4();
     const _p = new THREE.Vector3();
@@ -575,7 +560,9 @@ ${shader.fragmentShader}
       { x: 96, z:-72,  r: 20 }, // ARVN outpost
     ];
 
-    const treeCount = Math.max(120, Math.floor(280 * this.quality.foliageMultiplier));
+    const treeCount = this.quality.preset === 'low'
+      ? 24
+      : Math.max(42, Math.floor(140 * this.quality.foliageMultiplier));
     for (let i = 0; i < treeCount; i++) {
       const pos = this._placeAvoiding(avoidZones, -110, 110);
       if (!pos) continue;
@@ -609,7 +596,7 @@ ${shader.fragmentShader}
     }
 
     // ── Hand-placed canopy shade near village center (4-6 banyan/palm) ──
-    const canopyCount = 5;
+    const canopyCount = this.quality.preset === 'low' ? 1 : 3;
     for (let i = 0; i < canopyCount; i++) {
       const cx = 0 + this._rand(-6, 6);
       const cz = 20 + this._rand(-6, 6);
@@ -625,9 +612,9 @@ ${shader.fragmentShader}
 
     // Instanced grass + ferns — the big visual win
     veg.buildInstancedGroundCover({
-      areaRadius: 110,
-      grassCount: Math.floor(5000 * this.quality.foliageMultiplier),
-      fernCount:  Math.floor(800  * this.quality.foliageMultiplier),
+      areaRadius: 96,
+      grassCount: this.quality.preset === 'low' ? 450 : 900,
+      fernCount:  this.quality.preset === 'low' ? 80 : 180,
       avoidZones,
     });
 
@@ -650,21 +637,83 @@ ${shader.fragmentShader}
   }
 
   // ─── Structures (delegates to BuildingsBuilder) ──
-  _buildAllStructures() {
-    const builder = new BuildingsBuilder(this.scene, {
+  _createBuildingsBuilder() {
+    return new BuildingsBuilder(this.scene, {
       addCollider: (x, z, r, h) => this._addCollider(x, z, r, h),
       addInteractable: (item) => this.interactables.push(item),
       rand: (a, b) => this._rand(a, b),
       flickerLight: (l) => this._flickerLight(l),
     });
+  }
+
+  _captureBuilderAnimations(builder) {
+    if (builder.blinkers && builder.blinkers.length) {
+      this._blinkers = (this._blinkers || []).concat(builder.blinkers);
+      builder.blinkers = [];
+    }
+  }
+
+  _buildOpeningStructures(builder = this._createBuildingsBuilder()) {
+    if (this._openingStructuresBuilt) return builder;
+    this._openingStructuresBuilt = true;
+    this._builtVillageIndexes = this._builtVillageIndexes || new Set();
+    const lowFirstPass = this.quality.preset === 'low';
 
     // ── Village ────────────────────────────
-    LEVEL.village.buildings.forEach(b => builder.buildVietHut(b));
+    LEVEL.village.buildings.forEach((b, index) => {
+      const keepForFirstView = !lowFirstPass || b.npcId || b.type === 'market' || index === 1;
+      if (!keepForFirstView) return;
+      builder.buildVietHut(b);
+      this._builtVillageIndexes.add(index);
+    });
     builder.buildWell(6, 28);
-    builder.buildBarrels(8, 26, 3);
-    builder.buildCrates(-6, 34, 2);
+
+    // ── Helicopter wreck ───────────────────
+    const { x: cx, z: cz } = LEVEL.crashSite;
+    const wreck = builder.buildHelicopterWreck(cx, cz);
+    if (wreck && wreck.smokeMeshes) {
+      wreck.smokeMeshes.forEach(s => {
+        const idx = (s.userData && s.userData.smokeIndex) || 0;
+        this._animateSmoke(s, idx);
+      });
+    }
+
+    if (!lowFirstPass) {
+      this._buildOpeningDressing(builder);
+    }
+
+    this._captureBuilderAnimations(builder);
+    return builder;
+  }
+
+  _buildOpeningDressing(builder = this._createBuildingsBuilder()) {
+    if (this._openingDressingBuilt) return;
+    this._openingDressingBuilt = true;
+    this._builtVillageIndexes = this._builtVillageIndexes || new Set();
+
+    LEVEL.village.buildings.forEach((b, index) => {
+      if (this._builtVillageIndexes.has(index)) return;
+      builder.buildVietHut(b);
+      this._builtVillageIndexes.add(index);
+    });
+
+    builder.buildBarrels(8, 26, 2);
+    builder.buildCrates(-6, 34, 1);
     builder.buildFirePit(2, 24);
     builder.buildVillageLife(0, 20);
+
+    const { x: cx, z: cz } = LEVEL.crashSite;
+    builder.buildWreckDebrisTrail(cx, cz, 45);
+  }
+
+  _buildMissionStructures(builder, {
+    includeCampDressing = true,
+    includeOutskirts = false,
+    includeRoads = false,
+    applyBattleDamage = true,
+  } = {}) {
+    if (this._missionStructuresBuilt) return;
+    this._missionStructuresBuilt = true;
 
     // ── VC camp ────────────────────────────
     builder.buildFence(-35, -25, -70, -25);
@@ -676,7 +725,9 @@ ${shader.fragmentShader}
     builder.buildRadioTower(-44, -44);
     builder.buildSandbags(-50, -32, 6, 0);
     builder.buildSandbags(-38, -38, 0, 5);
-    builder.buildVCCampDressing(LEVEL.vcCamp.center.x, LEVEL.vcCamp.center.z);
+    if (includeCampDressing) {
+      builder.buildVCCampDressing(LEVEL.vcCamp.center.x, LEVEL.vcCamp.center.z);
+    }
 
     // Camp dirt floor (simple)
     const floor = new THREE.Mesh(
@@ -687,18 +738,6 @@ ${shader.fragmentShader}
     floor.position.set(-52, 0.015, -42);
     floor.receiveShadow = true;
     this.scene.add(floor);
-
-    // ── Helicopter wreck ───────────────────
-    const { x: cx, z: cz } = LEVEL.crashSite;
-    const wreck = builder.buildHelicopterWreck(cx, cz);
-    if (wreck && wreck.smokeMeshes) {
-      wreck.smokeMeshes.forEach(s => {
-        const idx = (s.userData && s.userData.smokeIndex) || 0;
-        this._animateSmoke(s, idx);
-      });
-    }
-    // Skid scar + debris trail leading away from the wreck
-    builder.buildWreckDebrisTrail(cx, cz, 60);
 
     // ── Clinic ─────────────────────────────
     builder.buildClinic(
@@ -728,32 +767,90 @@ ${shader.fragmentShader}
     // ── Buddhist shrine ruin ──────────────
     builder.buildShrineRuin(72, 4, this._veg || null);
 
-    // ── Open-world outskirt POIs (8 atmospheric set-pieces) ──
-    const ow = new OpenWorldBuilder(this.scene, {
-      buildings:       builder,
-      vegetation:      this._veg,
-      addCollider:     (x, z, r, h) => this._addCollider(x, z, r, h),
-      addInteractable: (item)        => this.interactables.push(item),
-      rand:            (a, b)        => this._rand(a, b),
-    });
-    ow.buildAll();
-
-    // ── Road network connecting all POIs ──
-    new RoadNetwork(this.scene).buildAll();
-
-    // ── Battle damage cosmetic pass (last, after all buildings) ─
-    builder.applyBattleDamage();
-
-    // Capture blinker lights (radio tower etc.) for frame-driven animation.
-    if (builder.blinkers && builder.blinkers.length) {
-      this._blinkers = (this._blinkers || []).concat(builder.blinkers);
+    if (includeOutskirts) {
+      // ── Open-world outskirt POIs (8 atmospheric set-pieces) ──
+      const ow = new OpenWorldBuilder(this.scene, {
+        buildings:       builder,
+        vegetation:      this._veg,
+        addCollider:     (x, z, r, h) => this._addCollider(x, z, r, h),
+        addInteractable: (item)        => this.interactables.push(item),
+        rand:            (a, b)        => this._rand(a, b),
+      });
+      ow.buildAll();
     }
+
+    if (includeRoads) {
+      // ── Road network connecting all POIs ──
+      new RoadNetwork(this.scene).buildAll();
+    }
+
+    if (applyBattleDamage) {
+      // ── Battle damage cosmetic pass (last, after all buildings) ─
+      builder.applyBattleDamage();
+    }
+
+    this._captureBuilderAnimations(builder);
+  }
+
+  _buildAllStructures() {
+    const builder = this._createBuildingsBuilder();
+    this._buildOpeningStructures(builder);
+    this._buildMissionStructures(builder, {
+      includeCampDressing: true,
+      includeOutskirts: true,
+      includeRoads: true,
+      applyBattleDamage: true,
+    });
+  }
+
+  async streamRemainingZones({ yieldFrame = null } = {}) {
+    if (this._deferredZonesBuilt) return;
+    this._deferredZonesBuilt = true;
+
+    const builder = this._createBuildingsBuilder();
+    const streamStep = async (fn) => {
+      if (yieldFrame) await yieldFrame();
+      fn();
+      if (yieldFrame) await yieldFrame();
+    };
+
+    await streamStep(() => this._buildOpeningDressing(builder));
+    await streamStep(() => this._buildMissionStructures(builder, {
+      includeCampDressing: this.quality.preset !== 'low',
+      includeOutskirts: false,
+      includeRoads: false,
+      applyBattleDamage: this.quality.preset !== 'low',
+    }));
   }
 
   // ─── Atmosphere (dust motes, haze, light shaft) ──
+  _getHazeTexture() {
+    if (World._hazeTexture) return World._hazeTexture;
+    if (typeof document === 'undefined') return null;
+
+    const size = 64;
+    const canvas = document.createElement('canvas');
+    canvas.width = size;
+    canvas.height = size;
+    const ctx = canvas.getContext('2d');
+    const gradient = ctx.createRadialGradient(size / 2, size / 2, 1, size / 2, size / 2, size / 2);
+    gradient.addColorStop(0.0, 'rgba(255,255,255,0.50)');
+    gradient.addColorStop(0.45, 'rgba(255,255,255,0.18)');
+    gradient.addColorStop(1.0, 'rgba(255,255,255,0.0)');
+    ctx.fillStyle = gradient;
+    ctx.fillRect(0, 0, size, size);
+
+    const texture = new THREE.CanvasTexture(canvas);
+    texture.colorSpace = THREE.SRGBColorSpace;
+    texture.magFilter = THREE.LinearFilter;
+    texture.minFilter = THREE.LinearFilter;
+    World._hazeTexture = texture;
+    return texture;
+  }
+
   _buildAtmosphere() {
     // 1) Floating dust motes (Three.js Points)
-    const dustCount = 200;
+    const dustCount = 60;
     const dustGeo = new THREE.BufferGeometry();
     const dustPositions = new Float32Array(dustCount * 3);
     const dustOffsets   = new Float32Array(dustCount); // for individual phase
@@ -766,13 +863,12 @@ ${shader.fragmentShader}
     dustGeo.setAttribute('position', new THREE.BufferAttribute(dustPositions, 3));
 
     const dustMat = new THREE.PointsMaterial({
-      color: 0xffe7b8,
-      size: 0.08,
+      color: 0xb9aa84,
+      size: 0.07,
       sizeAttenuation: true,
       transparent: true,
-      opacity: 0.55,
+      opacity: 0.28,
       depthWrite: false,
-      blending: THREE.AdditiveBlending,
     });
     const dust = new THREE.Points(dustGeo, dustMat);
     dust.position.set(0, 0, 0);
@@ -780,9 +876,13 @@ ${shader.fragmentShader}
     this.particles.push({ kind: 'dust', mesh: dust, offsets: dustOffsets, basePositions: dustPositions.slice() });
 
     // 2) Haze sprite near village fire pit
+    const hazeMap = this._getHazeTexture();
     const hazeMat = new THREE.SpriteMaterial({
-      color: 0xffaa55, transparent: true, opacity: 0.18,
-      depthWrite: false, blending: THREE.AdditiveBlending,
+      map: hazeMap,
+      color: 0xd1a86a,
+      transparent: true,
+      opacity: 0.14,
+      depthWrite: false,
     });
     const villageHaze = new THREE.Sprite(hazeMat.clone());
     villageHaze.scale.set(6, 4, 1);
@@ -792,23 +892,22 @@ ${shader.fragmentShader}
 
     // 3) Haze near helicopter wreck
     const wreckHaze = new THREE.Sprite(hazeMat.clone());
-    wreckHaze.material.color.setHex(0xa0a0a0);
-    wreckHaze.material.opacity = 0.22;
-    wreckHaze.scale.set(10, 7, 1);
+    wreckHaze.material.color.setHex(0x8c8a7c);
+    wreckHaze.material.opacity = 0.16;
+    wreckHaze.scale.set(8, 5.5, 1);
     const cw = LEVEL.crashSite;
     wreckHaze.position.set(cw.x, 4.5, cw.z + 1);
     this.scene.add(wreckHaze);
     this.particles.push({ kind: 'haze', mesh: wreckHaze, baseY: 4.5, phase: 1.7 });
 
     // 4) Volumetric-feeling light shaft near canopy break above the village
-    const shaftGeo = new THREE.ConeGeometry(8, 22, 16, 1, true);
+    const shaftGeo = new THREE.ConeGeometry(8, 22, 8, 1, true);
     const shaftMat = new THREE.MeshBasicMaterial({
-      color: 0xfff0c0,
+      color: 0xd0c090,
       transparent: true,
-      opacity: 0.07,
+      opacity: 0.035,
       side: THREE.DoubleSide,
       depthWrite: false,
-      blending: THREE.AdditiveBlending,
     });
     const shaft = new THREE.Mesh(shaftGeo, shaftMat);
     // Cone apex at top — flip so wide end is at the canopy and narrow opens down
@@ -835,7 +934,7 @@ ${shader.fragmentShader}
         p.mesh.position.y = p.baseY + Math.sin(t * 0.5 + p.phase) * 0.25;
         p.mesh.material.opacity = 0.16 + Math.sin(t * 0.3 + p.phase) * 0.05;
       } else if (p.kind === 'shaft') {
-        p.mesh.material.opacity = 0.06 + Math.sin(t * 0.25) * 0.02;
+        p.mesh.material.opacity = 0.03 + Math.sin(t * 0.25) * 0.01;
       }
     }
   }

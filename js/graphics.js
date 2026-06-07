@@ -1,15 +1,10 @@
 // ════════════════════════════════════════════
-//  GraphicsManager — AAA-style Three.js pipeline
-//  Sky + atmospheric scattering, cinematic lighting,
-//  AgX tone mapping, SSAO + GodRays + Bloom + color grading + SMAA
+//  GraphicsManager — late-90s tactical realism profile
+//  Flat humid sky, simple lighting, restrained color grade, low object cost
 // ════════════════════════════════════════════
 import * as THREE from 'three';
-import { Sky } from 'three/addons/objects/Sky.js';
 import { EffectComposer } from 'three/addons/postprocessing/EffectComposer.js';
 import { RenderPass } from 'three/addons/postprocessing/RenderPass.js';
-import { SSAOPass } from 'three/addons/postprocessing/SSAOPass.js';
-import { SMAAPass } from 'three/addons/postprocessing/SMAAPass.js';
-import { UnrealBloomPass } from 'three/addons/postprocessing/UnrealBloomPass.js';
 import { ShaderPass } from 'three/addons/postprocessing/ShaderPass.js';
 
 // ─── Tone mapping resolution (AgX with ACES fallback) ─
@@ -26,49 +21,49 @@ function _resolveToneMapping() {
 // ─── Quality presets ──────────────────────────
 const PRESETS = {
   low: {
+    pixelRatioCap: 0.85,
+    shadowMapSize: 512,
+    shadows: false,
+    ssao: false,
+    bloom: false,
+    grading: false,
+    aa: false,
+    bloomStrength: 0.0,
+    toneExposure: 1.05,
+    foliageMultiplier: 0.22,
+    godRays: false,
+    godRayIntensity: 0.0,
+    hazeMix: 0.08,
+  },
+  medium: {
     pixelRatioCap: 1.0,
+    shadowMapSize: 768,
+    shadows: true,
+    ssao: false,
+    bloom: false,
+    grading: true,
+    aa: false,
+    bloomStrength: 0.0,
+    toneExposure: 1.00,
+    foliageMultiplier: 0.35,
+    godRays: false,
+    godRayIntensity: 0.0,
+    hazeMix: 0.10,
+  },
+  high: {
+    pixelRatioCap: 1.15,
     shadowMapSize: 1024,
     shadows: true,
     ssao: false,
-    bloom: true,
+    bloom: false,
     grading: true,
     aa: false,
-    bloomStrength: 0.025,
-    toneExposure: 0.78,
+    bloomStrength: 0.0,
+    toneExposure: 0.98,
     foliageMultiplier: 0.55,
     godRays: false,
     godRayIntensity: 0.0,
-    hazeMix: 0.16,
-  },
-  medium: {
-    pixelRatioCap: 1.4,
-    shadowMapSize: 2048,
-    shadows: true,
-    ssao: true,
-    bloom: true,
-    grading: true,
-    aa: true,
-    bloomStrength: 0.035,
-    toneExposure: 0.82,
-    foliageMultiplier: 1.0,
-    godRays: true,
-    godRayIntensity: 0.10,
-    hazeMix: 0.20,
-  },
-  high: {
-    pixelRatioCap: 1.5,
-    shadowMapSize: 4096,
-    shadows: true,
-    ssao: true,
-    bloom: true,
-    grading: true,
-    aa: true,
-    bloomStrength: 0.045,
-    toneExposure: 0.84,
-    foliageMultiplier: 1.6,
-    godRays: true,
-    godRayIntensity: 0.16,
-    hazeMix: 0.24,
+    hazeMix: 0.12,
   },
 };
 
@@ -79,7 +74,7 @@ const PRESETS = {
 const ColorGradeShader = {
   uniforms: {
     tDiffuse:        { value: null },
-    uVignette:       { value: 0.18 },   // corner darken amount (0..1)
+    uVignette:       { value: 0.06 },   // corner darken amount (0..1)
     uVignetteSoft:   { value: 0.55 },   // smoothness of falloff
     uShadowWarm:     { value: new THREE.Vector3(0.04, 0.015, -0.02) }, // amber lift
     uHighlightCool:  { value: new THREE.Vector3(-0.01, 0.012, 0.04) }, // teal-gold push
@@ -243,13 +238,7 @@ export class GraphicsManager {
     const mem   = (typeof navigator !== 'undefined' && navigator.deviceMemory) || 4;
     const dpr   = (typeof window !== 'undefined' && window.devicePixelRatio) || 1;
 
-    // Apple Silicon Macs are massively underrated by hardwareConcurrency alone —
-    // bias aggressively to 'high' when on Mac with at least 8GB RAM.
-    const isMac = /Mac|Macintosh|iPad|iPhone/i.test(ua);
-    if (isMac && mem >= 8) return 'high';
-
-    if (cores >= 8 && mem >= 8 && dpr <= 2.5) return 'high';
-    if (cores >= 4 && mem >= 4) return 'medium';
+    if (cores >= 8 && mem >= 8 && dpr <= 1.5) return 'medium';
     return 'low';
   }
 
@@ -279,50 +268,13 @@ export class GraphicsManager {
     return this.preset;
   }
 
-  // ─── Sky (Hosek-Wilkie) + PMREM env map ────
+  // ─── Flat overcast sky and no PMREM ────
   _setupSkyAndEnvironment() {
-    const sky = new Sky();
-    sky.scale.setScalar(10000);
-    this.scene.add(sky);
-    this.sky = sky;
-
-    // Late-afternoon warm-humid jungle haze tuning
-    this.skyParams = {
-      turbidity:       8.0,    // hazier (jungle humidity)
-      rayleigh:        1.4,    // softer horizon scattering
-      mieCoefficient:  0.005,  // less dust glare
-      mieDirectionalG: 0.7,    // tighter sun glare
-      elevation:       45,     // mid-afternoon sun height (higher = less harsh from below)
-      azimuth:         220,    // sun in west sky behind player
-      exposure:        0.28,
-    };
-
-    const u = sky.material.uniforms;
-    u['turbidity'].value       = this.skyParams.turbidity;
-    u['rayleigh'].value        = this.skyParams.rayleigh;
-    u['mieCoefficient'].value  = this.skyParams.mieCoefficient;
-    u['mieDirectionalG'].value = this.skyParams.mieDirectionalG;
-
-    // Compute sun position from elevation/azimuth
-    const phi   = THREE.MathUtils.degToRad(90 - this.skyParams.elevation);
-    const theta = THREE.MathUtils.degToRad(this.skyParams.azimuth);
-    const sunPos = new THREE.Vector3();
-    sunPos.setFromSphericalCoords(1, phi, theta);
-    u['sunPosition'].value.copy(sunPos);
-
-    // Cache normalized sun direction for downstream lighting (world.js)
-    this.sunDirection.copy(sunPos).normalize();
-
-    // Generate an environment map from the sky and assign to scene
-    this.pmrem = new THREE.PMREMGenerator(this.renderer);
-    this.pmrem.compileEquirectangularShader();
-
-    if (this.envRT) this.envRT.dispose();
-    this.envRT = this.pmrem.fromScene(sky, 0.04);
-    this.scene.environment = this.envRT.texture;
-    // Keep the actual Sky mesh as the background (it tone-maps correctly).
-    // Don't assign scene.background to the raw HDR env-map — it blows out bloom.
-    this.scene.background = null;
+    const phi = THREE.MathUtils.degToRad(48);
+    const theta = THREE.MathUtils.degToRad(220);
+    this.sunDirection.setFromSphericalCoords(1, phi, theta).normalize();
+    this.scene.background = new THREE.Color(0x8b927e);
+    this.scene.environment = null;
   }
 
   /**
@@ -343,13 +295,13 @@ export class GraphicsManager {
     if (this.fillLight && this.fillLight.parent) this.fillLight.parent.remove(this.fillLight);
 
     // Hemisphere — warm sky, cool ground bounce
-    const hemi = new THREE.HemisphereLight(0xfff0d6, 0x3a4a35, 0.48);
+    const hemi = new THREE.HemisphereLight(0xc7c0a2, 0x252d22, 0.75);
     hemi.position.set(0, 50, 0);
     scene.add(hemi);
     this.hemiLight = hemi;
 
     // Main directional sun, aligned to Hosek-Wilkie sun
-    const sun = new THREE.DirectionalLight(0xffd0a0, 1.85);
+    const sun = new THREE.DirectionalLight(0xc7b986, 1.25);
     const dir = this.sunDirection.clone().multiplyScalar(160);
     sun.position.copy(dir);
     sun.target.position.set(0, 0, 0);
@@ -372,7 +324,7 @@ export class GraphicsManager {
 
     // Cool fill — opposite the sun, sky-bounce blue-grey
     const fillDir = this.sunDirection.clone().negate().setY(Math.abs(this.sunDirection.y) * 0.4 + 0.2).normalize();
-    const fill = new THREE.DirectionalLight(0x95a8be, 0.3);
+    const fill = new THREE.DirectionalLight(0x6d7a70, 0.25);
     fill.position.copy(fillDir.multiplyScalar(120));
     scene.add(fill);
     this.fillLight = fill;
@@ -385,7 +337,7 @@ export class GraphicsManager {
     // Open-world tuning: low density for ~280m sightlines so distant
     // mountain silhouettes & pagoda spires read while the warm tan tint
     // still ties everything to the Hosek-Wilkie sky.
-    scene.fog = new THREE.FogExp2(0x9c967f, 0.0028);
+    scene.fog = new THREE.FogExp2(0x68705f, 0.0042);
     return scene.fog;
   }
 
@@ -400,41 +352,10 @@ export class GraphicsManager {
     this.renderPass = new RenderPass(this.scene, this.camera);
     this.composer.addPass(this.renderPass);
 
-    // SSAO — tuned for jungle-scale geometry
-    this.ssaoPass = new SSAOPass(this.scene, this.camera, w, h);
-    this.ssaoPass.kernelRadius = 12;
-    this.ssaoPass.minDistance  = 0.005;
-    this.ssaoPass.maxDistance  = 0.15;
-    if (SSAOPass.OUTPUT && SSAOPass.OUTPUT.Default !== undefined) {
-      this.ssaoPass.output = SSAOPass.OUTPUT.Default;
-    }
-    this.composer.addPass(this.ssaoPass);
-
-    // God rays — analytical radial shafts driven by projected sun position.
-    // Sits between SSAO and Bloom so bloom further softens the bright shafts.
-    this.godRayPass = new ShaderPass(GodRayShader);
-    this.godRayPass.uniforms.uIntensity.value = this.settings.godRayIntensity;
-    this.godRayPass.uniforms.uAspect.value    = (w && h) ? (w / h) : (16 / 9);
-    this.composer.addPass(this.godRayPass);
-
-    // Bloom — only sun-glare-bright pixels bloom
-    this.bloomPass = new UnrealBloomPass(
-      new THREE.Vector2(w, h),
-      this.settings.bloomStrength,
-      0.35,   // radius (smaller = less smear)
-      1.10    // threshold (above sky brightness so only sun glints bloom)
-    );
-    this.composer.addPass(this.bloomPass);
-
     // Cinematic color grade + vignette + horizon haze
     this.gradePass = new ShaderPass(ColorGradeShader);
     this.gradePass.uniforms.uHazeMix.value = this.settings.hazeMix;
     this.composer.addPass(this.gradePass);
-
-    // SMAA last — smooth post-pipeline aliasing
-    const dpr = this.renderer.getPixelRatio();
-    this.smaaPass = new SMAAPass(w * dpr, h * dpr);
-    this.composer.addPass(this.smaaPass);
   }
 
   // ─── Renderer-level quality ────────────────

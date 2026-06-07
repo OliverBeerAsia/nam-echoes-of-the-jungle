@@ -165,7 +165,7 @@ class WorldItem {
 // ════════════════════════════════════════════
 //  GAME CLASS
 // ════════════════════════════════════════════
-class Game {
+export class Game {
   constructor() {
     this.state   = 'menu';
     this.clock   = new THREE.Clock(false);
@@ -173,6 +173,7 @@ class Game {
     this.worldItems = [];
     this.initialized = false;
     this.requestedGraphicsPreset = localStorage.getItem('nam_gfx_preset') || 'auto';
+    this._streamingStarted = false;
 
     this._bindUI();
     this._bindLockPrompt(); // set up lock-prompt click handler once globally
@@ -219,7 +220,8 @@ class Game {
     this.camera   = new THREE.PerspectiveCamera(CONFIG.FOV, innerWidth / innerHeight, 0.05, 1400);
     this.renderer = new THREE.WebGLRenderer({
       canvas: document.getElementById('game-canvas'),
-      antialias: true,
+      antialias: false,
+      powerPreference: 'high-performance',
     });
     this.renderer.setSize(innerWidth, innerHeight);
     this.renderer.setPixelRatio(Math.min(devicePixelRatio, 1.5));
@@ -238,7 +240,8 @@ class Game {
   async _startGame() {
     if (!this.initialized) {
       try {
-        await this._init();
+        this._showLoading();
+        await this._init((label, progress) => this._setLoading(label, progress));
       } catch (err) {
         console.error('[NAM] Fatal init error:', err);
         this._showBootError('Failed to initialize the mission. Check browser console and refresh.');
@@ -252,12 +255,36 @@ class Game {
     this._attemptPointerLock();
   }
 
-  async _init() {
+  _showLoading() {
+    document.getElementById('menu-screen')?.classList.add('hidden');
+    document.getElementById('controls-screen')?.classList.add('hidden');
+    document.getElementById('loading-screen')?.classList.remove('hidden');
+    const btn = document.getElementById('btn-start');
+    if (btn) btn.disabled = true;
+    this._setLoading('Preparing field kit...', 0.04);
+  }
+
+  _setLoading(label, progress = 0) {
+    const stage = document.getElementById('loading-stage');
+    const fill = document.getElementById('loading-fill');
+    if (stage && label) stage.textContent = label.toUpperCase();
+    if (fill) fill.style.width = Math.round(Math.max(0, Math.min(1, progress)) * 100) + '%';
+  }
+
+  _yieldFrame() {
+    return new Promise(resolve => requestAnimationFrame(() => resolve()));
+  }
+
+  async _init(onProgress = null) {
     this.initialized = true;
 
+    onProgress?.('Opening renderer...', 0.08);
+    await this._yieldFrame();
     this._initThree();
 
     // Systems
+    onProgress?.('Starting field systems...', 0.14);
+    await this._yieldFrame();
     this.audio  = new AudioManager();
     this.audio.init();
     this.audio.resume();
@@ -272,17 +299,28 @@ class Game {
     this.graphics.installLighting(this.scene);
     this.graphics.installFog(this.scene);
 
+    onProgress?.('Building crash sector...', 0.22);
+    await this._yieldFrame();
     this.rpg    = new RPGSystem();
     this.hud    = new HUD(this.rpg);
     this.world  = new World(this.scene, this.graphics.getWorldQuality(), this.assetManager);
     try {
-      this.world.build();
+      if (this.world.buildProgressively) {
+        await this.world.buildProgressively({
+          onProgress,
+          yieldFrame: () => this._yieldFrame(),
+        });
+      } else {
+        this.world.build();
+      }
       console.log('[NAM] World built OK — scene objects:', this.scene.children.length);
     } catch(e) {
       console.error('[NAM] World build FAILED:', e);
       throw e;
     }
 
+    onProgress?.('Placing player and squad systems...', 0.82);
+    await this._yieldFrame();
     importLegacyColliders(this.physics, this.world.colliders);
     this.physics.addGroundPlane(CONFIG.WORLD_SIZE);
 
@@ -368,6 +406,21 @@ class Game {
     }, 1500);
 
     this._startLoop();
+    onProgress?.('Ready.', 1);
+    await this._yieldFrame();
+    this._startBackgroundStreaming();
+  }
+
+  _startBackgroundStreaming() {
+    if (this._streamingStarted || !this.world?.streamRemainingZones) return;
+    this._streamingStarted = true;
+    setTimeout(() => {
+      this.world.streamRemainingZones({
+        yieldFrame: () => this._yieldFrame(),
+      }).then(() => {
+        console.log('[NAM] Deferred zones streamed — scene objects:', this.scene.children.length);
+      }).catch(err => console.warn('[NAM] Deferred zone streaming failed:', err));
+    }, 900);
   }
 
   _applyGraphicsPreset(preset, showNotice = false) {
@@ -1087,7 +1140,3 @@ class Game {
     this.hud.notifyDanger('You respawned at the crash site. Be more careful.');
   }
 }
-
-// ─── Boot ─────────────────────────────────
-const game = new Game();
-window.game = game;

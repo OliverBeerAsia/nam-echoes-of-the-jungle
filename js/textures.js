@@ -106,7 +106,9 @@ function _toTexture(canvas, { srgb = true, repeat = 1 } = {}) {
   tex.wrapS = THREE.RepeatWrapping;
   tex.wrapT = THREE.RepeatWrapping;
   tex.repeat.set(repeat, repeat);
-  tex.anisotropy = 8;
+  tex.magFilter = THREE.NearestFilter;
+  tex.minFilter = THREE.LinearMipmapLinearFilter;
+  tex.anisotropy = 2;
   tex.colorSpace = srgb ? THREE.SRGBColorSpace : THREE.NoColorSpace;
   tex.needsUpdate = true;
   return tex;
@@ -137,7 +139,7 @@ function _noiseWash(ctx, size, scale, intensity, base) {
 // ════════════════════════════════════════════════════════════
 // GROUND — dirt/grass speckled
 // ════════════════════════════════════════════════════════════
-export function makeGroundAlbedo({ base = 0x4a5530, accent = 0x6b6238, speck = 0x2a2a18, size = 512, key } = {}) {
+export function makeGroundAlbedo({ base = 0x4a5530, accent = 0x6b6238, speck = 0x2a2a18, size = 256, key } = {}) {
   return _cached(key || `ground:${base}:${accent}:${speck}:${size}`, () => {
     const canvas = _newCanvas(size);
     const ctx = _ctx(canvas);
@@ -201,7 +203,7 @@ export function makeGroundAlbedo({ base = 0x4a5530, accent = 0x6b6238, speck = 0
 // ════════════════════════════════════════════════════════════
 // BARK — vertical strips, cracks, knots
 // ════════════════════════════════════════════════════════════
-export function makeBarkAlbedo({ color = 0x4a3018, size = 256, key } = {}) {
+export function makeBarkAlbedo({ color = 0x4a3018, size = 128, key } = {}) {
   return _cached(key || `bark:${color}:${size}`, () => {
     const canvas = _newCanvas(size);
     const ctx = _ctx(canvas);
@@ -272,7 +274,7 @@ export function makeBarkAlbedo({ color = 0x4a3018, size = 256, key } = {}) {
 // ════════════════════════════════════════════════════════════
 // THATCH — diagonal woven straw
 // ════════════════════════════════════════════════════════════
-export function makeThatchAlbedo({ color = 0x8a6a3a, size = 256, key } = {}) {
+export function makeThatchAlbedo({ color = 0x8a6a3a, size = 128, key } = {}) {
   return _cached(key || `thatch:${color}:${size}`, () => {
     const canvas = _newCanvas(size);
     const ctx = _ctx(canvas);
@@ -331,7 +333,7 @@ export function makeThatchAlbedo({ color = 0x8a6a3a, size = 256, key } = {}) {
 // ════════════════════════════════════════════════════════════
 // WOOD PLANKS — horizontal seams + woodgrain
 // ════════════════════════════════════════════════════════════
-export function makeWoodPlankAlbedo({ color = 0x6a4a20, planks = 5, size = 256, key } = {}) {
+export function makeWoodPlankAlbedo({ color = 0x6a4a20, planks = 5, size = 128, key } = {}) {
   return _cached(key || `wood:${color}:${planks}:${size}`, () => {
     const canvas = _newCanvas(size);
     const ctx = _ctx(canvas);
@@ -395,7 +397,7 @@ export function makeWoodPlankAlbedo({ color = 0x6a4a20, planks = 5, size = 256, 
 // ════════════════════════════════════════════════════════════
 // STONE — weathered, mottled
 // ════════════════════════════════════════════════════════════
-export function makeStoneAlbedo({ color = 0x707070, size = 256, key } = {}) {
+export function makeStoneAlbedo({ color = 0x707070, size = 128, key } = {}) {
   return _cached(key || `stone:${color}:${size}`, () => {
     const canvas = _newCanvas(size);
     const ctx = _ctx(canvas);
@@ -463,7 +465,7 @@ export function makeStoneAlbedo({ color = 0x707070, size = 256, key } = {}) {
 // ════════════════════════════════════════════════════════════
 // METAL — dirty/painted
 // ════════════════════════════════════════════════════════════
-export function makeMetalAlbedo({ color = 0x4a4a4a, weathered = true, size = 256, key } = {}) {
+export function makeMetalAlbedo({ color = 0x4a4a4a, weathered = true, size = 128, key } = {}) {
   return _cached(key || `metal:${color}:${weathered}:${size}`, () => {
     const canvas = _newCanvas(size);
     const ctx = _ctx(canvas);
@@ -540,7 +542,7 @@ export function makeMetalAlbedo({ color = 0x4a4a4a, weathered = true, size = 256
 // ════════════════════════════════════════════════════════════
 // FABRIC — canvas/burlap weave
 // ════════════════════════════════════════════════════════════
-export function makeFabricAlbedo({ color = 0x5f6a56, size = 256, key } = {}) {
+export function makeFabricAlbedo({ color = 0x5f6a56, size = 128, key } = {}) {
   return _cached(key || `fabric:${color}:${size}`, () => {
     const canvas = _newCanvas(size);
     const ctx = _ctx(canvas);
@@ -597,7 +599,7 @@ export function makeFabricAlbedo({ color = 0x5f6a56, size = 256, key } = {}) {
 // ════════════════════════════════════════════════════════════
 // SANDBAG — burlap weave + smudges + sun-bleach
 // ════════════════════════════════════════════════════════════
-export function makeSandbagAlbedo({ color = 0x8a7a40, size = 256, key } = {}) {
+export function makeSandbagAlbedo({ color = 0x8a7a40, size = 128, key } = {}) {
   return _cached(key || `sandbag:${color}:${size}`, () => {
     const canvas = _newCanvas(size);
     const ctx = _ctx(canvas);
@@ -667,7 +669,7 @@ export function makeSandbagAlbedo({ color = 0x8a7a40, size = 256, key } = {}) {
 // ════════════════════════════════════════════════════════════
 // CORRUGATED METAL — vertical waves + rust
 // ════════════════════════════════════════════════════════════
-export function makeCorrugatedMetalAlbedo({ color = 0x3a3520, size = 256, key } = {}) {
+export function makeCorrugatedMetalAlbedo({ color = 0x3a3520, size = 128, key } = {}) {
   return _cached(key || `corrugated:${color}:${size}`, () => {
     const canvas = _newCanvas(size);
     const ctx = _ctx(canvas);
@@ -734,7 +736,7 @@ export function makeCorrugatedMetalAlbedo({ color = 0x3a3520, size = 256, key } 
 // ════════════════════════════════════════════════════════════
 // MUD — wet, glossy, organic
 // ════════════════════════════════════════════════════════════
-export function makeMudAlbedo({ color = 0x5f4e3a, size = 512, key } = {}) {
+export function makeMudAlbedo({ color = 0x5f4e3a, size = 256, key } = {}) {
   return _cached(key || `mud:${color}:${size}`, () => {
     const canvas = _newCanvas(size);
     const ctx = _ctx(canvas);
@@ -868,7 +870,7 @@ export function makeNormalFromCanvas(srcCanvas, { strength = 1.0, key } = {}) {
 // ════════════════════════════════════════════════════════════
 // NOISE NORMAL — standalone procedural
 // ════════════════════════════════════════════════════════════
-export function makeNoiseNormal({ scale = 4, strength = 1.0, size = 256, key } = {}) {
+export function makeNoiseNormal({ scale = 4, strength = 1.0, size = 128, key } = {}) {
   return _cached(key || `noiseNormal:${scale}:${strength}:${size}`, () => {
     // Build a luminance heightmap canvas, then sobel
     const src = _newCanvas(size);
@@ -1116,7 +1118,7 @@ function _drawBananaLeaf(ctx, cx, cy, len, color) {
   ctx.restore();
 }
 
-export function makeLeafCutout({ color = 0x2a6b20, shape = 'oval', size = 128, key } = {}) {
+export function makeLeafCutout({ color = 0x2a6b20, shape = 'oval', size = 96, key } = {}) {
   return _cached(key || `leaf:${color}:${shape}:${size}`, () => {
     const canvas = _newCanvas(size);
     const ctx = _ctx(canvas);
@@ -1146,7 +1148,7 @@ export function makeLeafCutout({ color = 0x2a6b20, shape = 'oval', size = 128, k
 // ════════════════════════════════════════════════════════════
 // FOLIAGE BILLBOARD — clustered leaves for canopy LOD
 // ════════════════════════════════════════════════════════════
-export function makeFoliageBillboard({ color = 0x2a6b20, layers = 6, size = 256, key } = {}) {
+export function makeFoliageBillboard({ color = 0x2a6b20, layers = 5, size = 128, key } = {}) {
   return _cached(key || `foliage:${color}:${layers}:${size}`, () => {
     const canvas = _newCanvas(size);
     const ctx = _ctx(canvas);

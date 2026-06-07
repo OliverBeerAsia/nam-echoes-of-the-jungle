@@ -183,7 +183,14 @@ function applyFoliageShader(material, opts = {}) {
       vs = vs.replace(
         '#include <worldpos_vertex>',
         `#include <worldpos_vertex>
-vWorldPosition = worldPosition.xyz;`
+{
+  vec4 foliageWorldPosition = vec4(transformed, 1.0);
+  #ifdef USE_INSTANCING
+    foliageWorldPosition = instanceMatrix * foliageWorldPosition;
+  #endif
+  foliageWorldPosition = modelMatrix * foliageWorldPosition;
+  vWorldPosition = foliageWorldPosition.xyz;
+}`
       );
     }
 
