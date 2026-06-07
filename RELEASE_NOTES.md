@@ -16,6 +16,7 @@ This release publishes the browser prototype of `NAM: Echoes of the Jungle` to G
 - Late NPCs and interactables are gated so field kit, ferry, convoy, camp, cage, and ARVN gate actions cannot advance out of sequence.
 - The browser build no longer depends on Google Fonts or CDN-hosted Three decoder paths. Rapier physics is opt-in; the default production build uses the legacy AABB collision fallback.
 - GitHub Pages deployment is handled by `.github/workflows/deploy-pages.yml`.
+- Vite is configured with the project Pages base path so deployed CSS and JS resolve under `/nam-echoes-of-the-jungle/`.
 
 ### Validation
 

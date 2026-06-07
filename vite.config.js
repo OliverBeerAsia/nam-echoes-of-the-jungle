@@ -48,6 +48,7 @@ function copyRuntimeAssetsPlugin() {
 }
 
 export default defineConfig({
+  base: '/nam-echoes-of-the-jungle/',
   plugins: [copyRuntimeAssetsPlugin()],
   server: {
     host: '127.0.0.1',
